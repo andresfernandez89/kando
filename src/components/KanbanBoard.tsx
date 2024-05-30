@@ -1,7 +1,8 @@
 "use client";
 import AddIcon from "@/icons/AddIcon";
-import { Column } from "@/types/kanbanBoard";
+import { Column, Id } from "@/types/kanbanBoard";
 import { useState } from "react";
+import ColumnContainer from "./ColumnsContainer";
 import { Button } from "./ui/button";
 export default function KanbanBoard() {
   const [columns, setColumns] = useState<Column[]>([]);
@@ -10,7 +11,11 @@ export default function KanbanBoard() {
       <div className="m-auto flex gap-4">
         <div className="flex gap-4">
           {columns.map((col) => (
-            <div key={col.id}>{col.title}</div>
+            <ColumnContainer
+              key={col.id}
+              column={col}
+              deleteColumn={deleteColumn}
+            />
           ))}
         </div>
         <Button
@@ -29,7 +34,12 @@ export default function KanbanBoard() {
       title: `Column ${columns.length + 1}`,
     };
     setColumns([...columns, columnToAdd]);
-    return <></>;
+    return;
+  }
+
+  function deleteColumn(id: Id) {
+    const filteredColumns = columns.filter((col) => col.id !== id);
+    setColumns(filteredColumns);
   }
 
   function generateId() {

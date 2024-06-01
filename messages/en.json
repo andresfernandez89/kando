@@ -1,0 +1,57 @@
+{
+  "Home": {
+    "title": "The Nature Blog",
+    "article": "Articles",
+    "p1": "Welcome to our green corner on the web! This blog is a tribute to the majesty of nature, a space dedicated to exploring and celebrating the beauty and diversity of the natural world around us.",
+    "p2": "From the densest forests to the driest deserts, from the highest mountains to the deepest oceans, nature is an endless source of inspiration and wonder. Here, we will immerse ourselves in the wonder of nature, sharing stories, images and reflections that capture its essence and importance.",
+    "p3": "This blog is for anyone who feels a connection to nature, whether through gardening, hiking, photography, or just quiet admiration. We hope our posts inspire you, inform you, and help you further appreciate the beauty and importance of nature."
+  },
+  "Nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "about": "About",
+    "register": "Register",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "notFound": {
+    "404": "404 - Page Not Found",
+    "msg": "The page you are looking for does not exist.",
+    "btnGoBack": "Go back to the home page"
+  },
+  "LocaleSwitcher": {
+    "switchLocale": "{locale, select, es {🇺🇸} en {🇪🇸} other {Unknown}}"
+  },
+  "Blog": {
+    "title": "Blog English"
+  },
+  "Profile": {
+    "title": "User Profile",
+    "user": "User",
+    "email": "Email",
+    "role": "Rol",
+    "create-date": "Register Date"
+  },
+  "Login": {
+    "title": "Login",
+    "email": "Email",
+    "pass": "Password",
+    "loginBtn": "Login",
+    "googleBtn": "Sign in with Google",
+    "notCount": "You do not have an account?",
+    "register": "Register",
+    "passForgot": "Forgot you password?",
+    "passRecovery": "Password Recovery"
+  },
+  "Register": {
+    "title": "Register",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "pass": "Password",
+    "repass": "Re Password",
+    "registerBtn": "Register",
+    "loginMsg": "Are you already registered?",
+    "login": "Login"
+  }
+}

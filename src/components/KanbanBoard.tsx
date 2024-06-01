@@ -40,13 +40,14 @@ export default function KanbanBoard() {
                   key={col.id}
                   column={col}
                   deleteColumn={deleteColumn}
+                  updateColumn={updateColumn}
                 />
               ))}
             </SortableContext>
           </div>
           <Button
             onClick={() => createNewColumn()}
-            className="flex h-[62px] w-[350px] min-w-[350px] cursor-pointer gap-2 rounded-md border-2 p-4"
+            className="flex h-[62px] w-[272px] min-w-[272px] cursor-pointer gap-2 rounded-md border-2 p-4"
           >
             <AddIcon />
             Add Column
@@ -58,6 +59,7 @@ export default function KanbanBoard() {
               <ColumnContainer
                 column={activeColumn}
                 deleteColumn={deleteColumn}
+                updateColumn={updateColumn}
               />
             )}
           </DragOverlay>,
@@ -108,5 +110,13 @@ export default function KanbanBoard() {
       );
       return arrayMove(columns, activeColumnIndex, overColumnIndex);
     });
+  }
+
+  function updateColumn(id: Id, title: Column["title"]) {
+    const newColumns = columns.map((col) => {
+      if (col.id !== id) return col;
+      return { ...col, title };
+    });
+    setColumns(newColumns);
   }
 }

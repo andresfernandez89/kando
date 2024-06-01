@@ -1,5 +1,7 @@
 import DeleteIcon from "@/icons/deleteIcon";
 import type { Column, Id } from "@/types/kanbanBoard";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { Button } from "./ui/button";
 
 interface Props {
@@ -9,9 +11,44 @@ interface Props {
 
 export default function ColumnContainer(props: Props) {
   const { column, deleteColumn } = props;
+  const {
+    setNodeRef,
+    attributes,
+    listeners,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: column.id,
+    data: {
+      type: "Column",
+      column,
+    },
+  });
+
+  const style = { transition, transform: CSS.Transform.toString(transform) };
+
+  if (isDragging) {
+    return (
+      <div
+        ref={setNodeRef}
+        style={style}
+        className="flex h-[500px] max-h-[500px] w-[350px] flex-col rounded-md border-4 bg-card opacity-40"
+      ></div>
+    );
+  }
+
   return (
-    <div className="flex h-[500px] max-h-[500px] w-[350px] flex-col rounded-md border-4 bg-card">
-      <div className="text-md flex h-[56px] w-full cursor-grab items-center justify-between rounded-[1px] rounded-b-none bg-primary p-3 font-bold">
+    <div
+      ref={setNodeRef}
+      style={style}
+      className="flex h-[500px] max-h-[500px] w-[350px] flex-col rounded-md border-4 bg-card"
+    >
+      <div
+        {...attributes}
+        {...listeners}
+        className="text-md flex h-[56px] w-full cursor-grab items-center justify-between rounded-[1px] rounded-b-none bg-primary p-3 font-bold"
+      >
         <div className="flex w-full items-center gap-2 text-primary-foreground">
           <div className="flex items-center justify-center rounded border bg-[#ddd6fe] p-2 text-sm text-[#09090b]">
             0

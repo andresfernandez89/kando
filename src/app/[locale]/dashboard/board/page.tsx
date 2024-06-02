@@ -1,5 +1,5 @@
-const Board = () => {
-  return <div>Board</div>;
-};
+import KanbanBoard from "@/components/KanbanBoard";
 
-export default Board;
+export default function Page() {
+  return <KanbanBoard />;
+}

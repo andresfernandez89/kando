@@ -69,7 +69,7 @@ export default function Login() {
         <p className="text-sm">
           {t("notCount")}
           <Link
-            href={`/register`}
+            href={"/home/register"}
             className="ms-5 text-teal-500 hover:font-bold hover:text-teal-300"
           >
             {t("register")}

@@ -92,7 +92,7 @@ export function Register() {
         <p>
           {t("loginMsg")}
           <Link
-            href={locale + `/login`}
+            href={locale + `/home/login`}
             className="ms-5 font-semibold text-teal-500"
           >
             {t("login")}

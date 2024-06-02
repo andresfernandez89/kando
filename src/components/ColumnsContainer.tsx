@@ -13,11 +13,13 @@ interface Props {
   updateColumn: (id: Id, title: Column["title"]) => void;
   createTask: (columnId: Id) => void;
   tasks: Task[];
+  deleteTask: (id: Id) => void;
 }
 
 export default function ColumnContainer(props: Props) {
-  const { column, deleteColumn, updateColumn, createTask, tasks } = props;
-  const [editMode, setEditMode] = useState(false);
+  const { column, deleteColumn, updateColumn, createTask, tasks, deleteTask } =
+    props;
+  const [editMode, setEditMode] = useState<boolean>(false);
 
   const {
     setNodeRef,
@@ -71,7 +73,7 @@ export default function ColumnContainer(props: Props) {
               column.title
             ) : (
               <input
-                className="text-[#f5f3ff rounded border-2 py-1 pl-1 text-base font-medium outline-none focus:w-full focus:border-[#ddd6fe] focus:bg-[#8b5cf6]"
+                className="rounded border-2 py-1 pl-1 text-base font-medium text-[#f5f3ff] outline-none focus:w-full focus:border-[#ddd6fe] focus:bg-[#8b5cf6]"
                 value={column.title}
                 onChange={(e) => updateColumn(column.id, e.target.value)}
                 autoFocus
@@ -93,7 +95,7 @@ export default function ColumnContainer(props: Props) {
       </div>
       <div className="flex flex-grow flex-col gap-4 overflow-y-auto overflow-x-hidden p-2">
         {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} />
+          <TaskCard key={task.id} task={task} deleteTask={deleteTask} />
         ))}
       </div>
       <div className="p-2">

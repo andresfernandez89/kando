@@ -1,10 +1,10 @@
 {
-  "Home": {
-    "title": "El Blog de la Naturaleza",
-    "article": "Artículos",
-    "p1": "¡Bienvenidos a nuestro rincón verde en la web! Este blog es un homenaje a la majestuosidad de la naturaleza, un espacio dedicado a explorar y celebrar la belleza y la diversidad del mundo natural que nos rodea.",
-    "p2": "Desde los bosques más densos hasta los desiertos más áridos, desde las montañas más altas hasta los océanos más profundos, la naturaleza es una fuente inagotable de inspiración y asombro. Aquí, nos sumergiremos en la maravilla de la naturaleza, compartiendo historias, imágenes y reflexiones que capturan su esencia y su importancia.",
-    "p3": "Este blog es para todos aquellos que sienten una conexión con la naturaleza, ya sea a través de la jardinería, el senderismo, la fotografía o simplemente la admiración tranquila. Esperamos que nuestras publicaciones te inspiren, te informen y te ayuden a apreciar aún más la belleza y la importancia de la naturaleza."
+  "Dashboard": {
+    "title": "",
+    "article": "",
+    "p1": "",
+    "p2": "",
+    "p3": ""
   },
   "Nav": {
     "home": "Inicio",
@@ -20,7 +20,8 @@
     "btnGoBack": "Regresar a Inicio"
   },
   "LocaleSwitcher": {
-    "switchLocale": "{locale, select, es {🇺🇸} en {🇪🇸} other {Unknown}}"
+    "switch": "Click para cambiar a Ingles",
+    "switchLocale": "{locale, select, es {🇪🇸} en {🇺🇸} other {Unknown}}"
   },
   "Blog": {
     "title": "Blog Español"

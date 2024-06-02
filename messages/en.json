@@ -1,10 +1,10 @@
 {
-  "Home": {
+  "Dashboard": {
     "title": "The Nature Blog",
     "article": "Articles",
-    "p1": "Welcome to our green corner on the web! This blog is a tribute to the majesty of nature, a space dedicated to exploring and celebrating the beauty and diversity of the natural world around us.",
-    "p2": "From the densest forests to the driest deserts, from the highest mountains to the deepest oceans, nature is an endless source of inspiration and wonder. Here, we will immerse ourselves in the wonder of nature, sharing stories, images and reflections that capture its essence and importance.",
-    "p3": "This blog is for anyone who feels a connection to nature, whether through gardening, hiking, photography, or just quiet admiration. We hope our posts inspire you, inform you, and help you further appreciate the beauty and importance of nature."
+    "p1": "",
+    "p2": "",
+    "p3": ""
   },
   "Nav": {
     "home": "Home",
@@ -20,7 +20,8 @@
     "btnGoBack": "Go back to the home page"
   },
   "LocaleSwitcher": {
-    "switchLocale": "{locale, select, es {🇺🇸} en {🇪🇸} other {Unknown}}"
+    "switch": "Click to change to Spanish",
+    "switchLocale": "{locale, select, es {🇪🇸} en {🇺🇸} other {Unknown}}"
   },
   "Blog": {
     "title": "Blog English"

@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 export default function Home() {
-  return <main className="mt-24">Home</main>;
+  redirect(`login`);
 }

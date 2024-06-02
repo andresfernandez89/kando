@@ -4,12 +4,13 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export function Register() {
   const [error, setError] = useState();
   const router = useRouter();
   const t = useTranslations("Register");
+  const locale = useLocale();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -90,7 +91,10 @@ export function Register() {
       <article className="mt-5 flex items-center justify-center gap-5">
         <p>
           {t("loginMsg")}
-          <Link href="/login" className="ms-5 font-semibold text-teal-500">
+          <Link
+            href={locale + `/login`}
+            className="ms-5 font-semibold text-teal-500"
+          >
             {t("login")}
           </Link>
         </p>

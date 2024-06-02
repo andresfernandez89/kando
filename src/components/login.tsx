@@ -5,12 +5,13 @@ import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { GoogleSignBTN } from "./google-sign-btn";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function Login() {
   const [error, setError] = useState("");
   const router = useRouter();
   const t = useTranslations("Login");
+  const locale = useLocale();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,7 +23,7 @@ export default function Login() {
       redirect: false,
     });
     if (res?.error) return setError(res.error as string);
-    if (res?.ok) return router.push("/");
+    if (res?.ok) return router.push(`/dashboard/board`);
 
     console.log(res);
   };
@@ -30,7 +31,7 @@ export default function Login() {
   return (
     <section className="flex w-full max-w-sm flex-col items-center justify-items-center gap-10 p-5 md:max-w-3xl md:p-10">
       <article className="flex items-center justify-center">
-        <h1 className="mb-16 mt-28 text-xl font-bold md:text-3xl">
+        <h1 className="mb-16 mt-12 text-xl font-bold md:text-3xl">
           {t("title")}
         </h1>
       </article>
@@ -68,7 +69,7 @@ export default function Login() {
         <p className="text-sm">
           {t("notCount")}
           <Link
-            href="/register"
+            href={`/register`}
             className="ms-5 text-teal-500 hover:font-bold hover:text-teal-300"
           >
             {t("register")}

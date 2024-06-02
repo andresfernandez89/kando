@@ -1,11 +1,13 @@
+import LocaleSwitchBtn from "@/components/locale-switch-btn";
+import "../home.css";
 import { Register } from "@/components/register";
-
-const RegisterPage = () => {
+export default function Home() {
   return (
-    <div className="h-[calc(100vh-4rem)] items-center">
-      <Register />
-    </div>
+    <>
+      <LocaleSwitchBtn />
+      <div className="w-full max-w-md">
+        <Register />
+      </div>
+    </>
   );
-};
-
-export default RegisterPage;
+}

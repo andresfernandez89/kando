@@ -1,11 +1,13 @@
+import LocaleSwitchBtn from "@/components/locale-switch-btn";
+import "../home.css";
 import Login from "@/components/login";
-
-const LoginPage = () => {
+export default function LoginPage() {
   return (
-    <div className="h-[calc(100vh-4rem)] items-center">
-      <Login />
-    </div>
+    <>
+      <LocaleSwitchBtn />
+      <div className="w-full max-w-md">
+        <Login />
+      </div>
+    </>
   );
-};
-
-export default LoginPage;
+}

@@ -10,9 +10,13 @@ export default function LocaleSwitchBtn() {
   const pathname = usePathname();
 
   return (
-    <div className="flex w-full max-w-md justify-end gap-2">
-      <p className="text-sm">{t("switch")}</p>
-      <Link href={pathname} locale={otherLocale}>
+    <div>
+      <Link
+        href={pathname}
+        locale={otherLocale}
+        className="flex w-full max-w-md justify-end gap-2"
+      >
+        <p className="text-sm">{t("switch")}</p>
         {t("switchLocale", { locale: otherLocale })}
       </Link>
     </div>

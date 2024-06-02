@@ -1,10 +1,7 @@
 {
-  "Dashboard": {
-    "title": "",
-    "article": "",
-    "p1": "",
-    "p2": "",
-    "p3": ""
+  "Aside": {
+    "board": "Pizarra",
+    "todo": "Por Hacer"
   },
   "Nav": {
     "home": "Inicio",
@@ -14,13 +11,22 @@
     "login": "Ingresar",
     "logout": "Salir"
   },
+  "Footer": {
+    "licensing": "Licencia",
+    "cookie": "Politica de Cookies",
+    "contact": "Contacto",
+    "privacy": "Privacidad",
+    "terms": "Terminos y Condiciones",
+    "reserved": "Todos los derechos reservados"
+  },
+
   "notFound": {
     "404": "404 - Página no se encontro",
     "msg": "La página que estas buscando no existe",
     "btnGoBack": "Regresar a Inicio"
   },
   "LocaleSwitcher": {
-    "switch": "Click para cambiar a Ingles",
+    "switch": "Ingles",
     "switchLocale": "{locale, select, es {🇪🇸} en {🇺🇸} other {Unknown}}"
   },
   "Blog": {

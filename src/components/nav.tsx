@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useLocale, useTranslations } from "next-intl";
 import LocaleSwitchBtn from "@/components/locale-switch-btn";
@@ -57,48 +56,27 @@ export function Navbar() {
             </a>
           </div>
 
-          <div className="mr-5 flex gap-5">
-            {session?.user ? (
-              <>
-                <button
-                  className="text-md relative m-1 flex px-2 py-1 align-middle font-bold text-rose-500 hover:border-b-2 hover:border-teal-400 hover:text-rose-300 dark:text-rose-400 dark:hover:text-neutral-200"
-                  onClick={async () => {
-                    await signOut({
-                      callbackUrl: "/",
-                    });
-                  }}
-                  type="button"
-                >
-                  {t("logout")}
-                </button>
-              </>
-            ) : (
-              <>
-                <Link href={locale + "/login"}>
-                  <button className="text-md relative m-1 flex px-2 py-1 align-middle font-bold text-rose-500 hover:border-b-2 hover:border-teal-400 hover:text-rose-300 dark:text-rose-400 dark:hover:text-neutral-200">
-                    {t("login")}
-                  </button>
-                </Link>
-
-                <Link href={locale + `/register`}>
-                  <button
-                    className="text-md relative m-1 flex px-2 py-1 align-middle font-bold text-rose-500 hover:border-b-2 hover:border-teal-400 hover:text-rose-300 dark:text-rose-400 dark:hover:text-neutral-200"
-                    type="button"
-                  >
-                    {t("register")}
-                  </button>
-                </Link>
-              </>
-            )}
-            <div className="flex items-center">
-              <LocaleSwitchBtn />
-            </div>
+          <div className="mr-5 flex justify-end gap-5">
+            <button
+              className="text-md relative m-1 flex px-2 py-1 align-middle font-bold text-violet-500 hover:border-b-2 hover:border-violet-400 hover:text-violet-300 dark:text-violet-400 dark:hover:text-neutral-200"
+              onClick={async () => {
+                await signOut({
+                  callbackUrl: "/",
+                });
+              }}
+              type="button"
+            >
+              {t("logout")}
+            </button>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center gap-4">
             {/* User Avatar */}
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500 p-2 text-white">
-              FH
+              SI
+            </div>
+            <div className="flex items-center">
+              <LocaleSwitchBtn />
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import KanbanBoard from "@/components/KanbanBoard";
 
-export default function Page() {
+export default function BoardPage() {
   return <KanbanBoard />;
 }

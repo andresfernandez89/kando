@@ -1,19 +1,24 @@
+import AddIcon from "@/icons/AddIcon";
 import DeleteIcon from "@/icons/deleteIcon";
-import type { Column, Id } from "@/types/kanbanBoard";
+import type { Column, Id, Task } from "@/types/kanbanBoard";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
+import TaskCard from "./TaskCard";
 import { Button } from "./ui/button";
 
 interface Props {
   column: Column;
   deleteColumn: (id: Id) => void;
   updateColumn: (id: Id, title: Column["title"]) => void;
+  createTask: (columnId: Id) => void;
+  tasks: Task[];
 }
 
 export default function ColumnContainer(props: Props) {
-  const { column, deleteColumn, updateColumn } = props;
+  const { column, deleteColumn, updateColumn, createTask, tasks } = props;
   const [editMode, setEditMode] = useState(false);
+
   const {
     setNodeRef,
     attributes,
@@ -87,9 +92,19 @@ export default function ColumnContainer(props: Props) {
         </div>
       </div>
       <div className="flex flex-grow flex-col gap-4 overflow-y-auto overflow-x-hidden p-2">
-        Content
+        {tasks.map((task) => (
+          <TaskCard key={task.id} task={task} />
+        ))}
       </div>
-      <div className="p-2">Footer</div>
+      <div className="p-2">
+        <Button
+          onClick={() => createTask(column.id)}
+          className="flex w-full items-center justify-start gap-1 bg-[#fff] text-[#09090b] hover:rounded hover:bg-[#f1f5f9]"
+        >
+          <AddIcon />
+          Add task
+        </Button>
+      </div>
     </div>
   );
 }

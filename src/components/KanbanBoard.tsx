@@ -1,6 +1,6 @@
 "use client";
 import AddIcon from "@/icons/AddIcon";
-import type { Column, Id } from "@/types/kanbanBoard";
+import type { Column, Id, Task } from "@/types/kanbanBoard";
 import {
   DndContext,
   DragEndEvent,
@@ -20,6 +20,7 @@ export default function KanbanBoard() {
   const [columns, setColumns] = useState<Column[]>([]);
   const columnsId = useMemo(() => columns.map((col) => col.id), [columns]);
   const [activeColumn, setActiveColumn] = useState<Column | null>(null);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 3 } }),
@@ -41,6 +42,8 @@ export default function KanbanBoard() {
                   column={col}
                   deleteColumn={deleteColumn}
                   updateColumn={updateColumn}
+                  createTask={createTask}
+                  tasks={tasks.filter((task) => task.columnId === col.id)}
                 />
               ))}
             </SortableContext>
@@ -60,6 +63,8 @@ export default function KanbanBoard() {
                 column={activeColumn}
                 deleteColumn={deleteColumn}
                 updateColumn={updateColumn}
+                createTask={createTask}
+                tasks={tasks}
               />
             )}
           </DragOverlay>,
@@ -118,5 +123,15 @@ export default function KanbanBoard() {
       return { ...col, title };
     });
     setColumns(newColumns);
+  }
+
+  function createTask(columnId: Id) {
+    const newTask: Task = {
+      id: generateId(),
+      columnId,
+      content: `Task ${tasks.length + 1}`,
+    };
+
+    setTasks([...tasks, newTask]);
   }
 }

@@ -1,5 +1,7 @@
 "use client";
+import { UseClientOnlyPortal } from "@/app/hooks/UseClientOnlyPortal";
 import AddIcon from "@/icons/AddIcon";
+import { generateId } from "@/lib/utils";
 import type { Column, Id, Task } from "@/types/kanbanBoard";
 import {
   DndContext,
@@ -13,7 +15,6 @@ import {
 } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { useMemo, useState } from "react";
-import { createPortal } from "react-dom";
 import ColumnContainer from "./ColumnsContainer";
 import TaskCard from "./TaskCard";
 import { Button } from "./ui/button";
@@ -63,7 +64,7 @@ export default function KanbanBoard() {
             Add Column
           </Button>
         </div>
-        {createPortal(
+        <UseClientOnlyPortal>
           <DragOverlay>
             {activeColumn && (
               <ColumnContainer
@@ -85,30 +86,12 @@ export default function KanbanBoard() {
                 updateTask={updateTask}
               />
             )}
-          </DragOverlay>,
-          document.body,
-        )}
+          </DragOverlay>
+          ,
+        </UseClientOnlyPortal>
       </DndContext>
     </div>
   );
-
-  function createNewColumn() {
-    const columnToAdd: Column = {
-      id: generateId(),
-      title: `Column ${columns.length + 1}`,
-    };
-    setColumns([...columns, columnToAdd]);
-    return;
-  }
-
-  function deleteColumn(id: Id) {
-    const filteredColumns = columns.filter((col) => col.id !== id);
-    setColumns(filteredColumns);
-  }
-
-  function generateId() {
-    return self.crypto.randomUUID();
-  }
 
   function onDragStart(event: DragStartEvent) {
     if (event.active.data.current?.type === "Column") {
@@ -172,6 +155,23 @@ export default function KanbanBoard() {
         return arrayMove(tasks, activeIndex, activeIndex);
       });
     }
+  }
+
+  function createNewColumn() {
+    const columnToAdd: Column = {
+      id: generateId(),
+      title: `Column ${columns.length + 1}`,
+    };
+    setColumns([...columns, columnToAdd]);
+    return;
+  }
+
+  function deleteColumn(id: Id) {
+    const filteredColumns = columns.filter((col) => col.id !== id);
+    setColumns(filteredColumns);
+
+    const newTasks = tasks.filter((task) => task.columnId !== id);
+    setTasks(newTasks);
   }
 
   function updateColumn(id: Id, title: Column["title"]) {

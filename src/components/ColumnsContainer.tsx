@@ -1,19 +1,39 @@
+import AddIcon from "@/icons/AddIcon";
 import DeleteIcon from "@/icons/deleteIcon";
-import type { Column, Id } from "@/types/kanbanBoard";
-import { useSortable } from "@dnd-kit/sortable";
+import type { Column, Id, Task } from "@/types/kanbanBoard";
+import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import TaskCard from "./TaskCard";
 import { Button } from "./ui/button";
 
 interface Props {
   column: Column;
+  tasks: Task[];
   deleteColumn: (id: Id) => void;
   updateColumn: (id: Id, title: Column["title"]) => void;
+  createTask: (columnId: Id) => void;
+  updateTask: (id: Id, content: Task["content"]) => void;
+  deleteTask: (id: Id) => void;
 }
 
 export default function ColumnContainer(props: Props) {
-  const { column, deleteColumn, updateColumn } = props;
-  const [editMode, setEditMode] = useState(false);
+  const {
+    column,
+    tasks,
+    deleteColumn,
+    updateColumn,
+    createTask,
+    deleteTask,
+    updateTask,
+  } = props;
+
+  const [editMode, setEditMode] = useState<boolean>(false);
+
+  const tasksId = useMemo(() => {
+    return tasks.map((task) => task.id);
+  }, [tasks]);
+
   const {
     setNodeRef,
     attributes,
@@ -66,7 +86,7 @@ export default function ColumnContainer(props: Props) {
               column.title
             ) : (
               <input
-                className="text-[#f5f3ff rounded border-2 py-1 pl-1 text-base font-medium outline-none focus:w-full focus:border-[#ddd6fe] focus:bg-[#8b5cf6]"
+                className="rounded border-2 py-1 pl-1 text-base font-medium text-[#f5f3ff] outline-none focus:w-full focus:border-[#ddd6fe] focus:bg-[#8b5cf6]"
                 value={column.title}
                 onChange={(e) => updateColumn(column.id, e.target.value)}
                 autoFocus
@@ -87,9 +107,26 @@ export default function ColumnContainer(props: Props) {
         </div>
       </div>
       <div className="flex flex-grow flex-col gap-4 overflow-y-auto overflow-x-hidden p-2">
-        Content
+        <SortableContext items={tasksId}>
+          {tasks.map((task) => (
+            <TaskCard
+              key={task.id}
+              task={task}
+              deleteTask={deleteTask}
+              updateTask={updateTask}
+            />
+          ))}
+        </SortableContext>
       </div>
-      <div className="p-2">Footer</div>
+      <div className="p-2">
+        <Button
+          onClick={() => createTask(column.id)}
+          className="flex w-full items-center justify-start gap-1 bg-[#fff] text-[#09090b] hover:rounded hover:bg-[#f1f5f9]"
+        >
+          <AddIcon />
+          Add task
+        </Button>
+      </div>
     </div>
   );
 }

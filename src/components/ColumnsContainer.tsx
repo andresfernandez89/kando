@@ -1,9 +1,9 @@
 import AddIcon from "@/icons/AddIcon";
 import DeleteIcon from "@/icons/deleteIcon";
 import type { Column, Id, Task } from "@/types/kanbanBoard";
-import { useSortable } from "@dnd-kit/sortable";
+import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import TaskCard from "./TaskCard";
 import { Button } from "./ui/button";
 
@@ -27,7 +27,12 @@ export default function ColumnContainer(props: Props) {
     deleteTask,
     updateTask,
   } = props;
+
   const [editMode, setEditMode] = useState<boolean>(false);
+
+  const tasksId = useMemo(() => {
+    return tasks.map((task) => task.id);
+  }, [tasks]);
 
   const {
     setNodeRef,
@@ -102,14 +107,16 @@ export default function ColumnContainer(props: Props) {
         </div>
       </div>
       <div className="flex flex-grow flex-col gap-4 overflow-y-auto overflow-x-hidden p-2">
-        {tasks.map((task) => (
-          <TaskCard
-            key={task.id}
-            task={task}
-            deleteTask={deleteTask}
-            updateTask={updateTask}
-          />
-        ))}
+        <SortableContext items={tasksId}>
+          {tasks.map((task) => (
+            <TaskCard
+              key={task.id}
+              task={task}
+              deleteTask={deleteTask}
+              updateTask={updateTask}
+            />
+          ))}
+        </SortableContext>
       </div>
       <div className="p-2">
         <Button

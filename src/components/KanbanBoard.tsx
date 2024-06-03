@@ -40,11 +40,12 @@ export default function KanbanBoard() {
                 <ColumnContainer
                   key={col.id}
                   column={col}
+                  tasks={tasks.filter((task) => task.columnId === col.id)}
                   deleteColumn={deleteColumn}
                   updateColumn={updateColumn}
                   createTask={createTask}
-                  tasks={tasks.filter((task) => task.columnId === col.id)}
                   deleteTask={deleteTask}
+                  updateTask={updateTask}
                 />
               ))}
             </SortableContext>
@@ -62,13 +63,14 @@ export default function KanbanBoard() {
             {activeColumn && (
               <ColumnContainer
                 column={activeColumn}
-                deleteColumn={deleteColumn}
-                updateColumn={updateColumn}
-                createTask={createTask}
                 tasks={tasks.filter(
                   (task) => task.columnId === activeColumn.id,
                 )}
+                deleteColumn={deleteColumn}
+                updateColumn={updateColumn}
+                createTask={createTask}
                 deleteTask={deleteTask}
+                updateTask={updateTask}
               />
             )}
           </DragOverlay>,
@@ -122,11 +124,11 @@ export default function KanbanBoard() {
   }
 
   function updateColumn(id: Id, title: Column["title"]) {
-    const newColumns = columns.map((col) => {
+    const columnsUpdated = columns.map((col) => {
       if (col.id !== id) return col;
       return { ...col, title };
     });
-    setColumns(newColumns);
+    setColumns(columnsUpdated);
   }
 
   function createTask(columnId: Id) {
@@ -142,5 +144,13 @@ export default function KanbanBoard() {
   function deleteTask(id: Id) {
     const newTasks = tasks.filter((task) => task.id !== id);
     setTasks(newTasks);
+  }
+
+  function updateTask(id: Id, content: Task["content"]) {
+    const tasksUpdated = tasks.map((task) => {
+      if (task.id !== id) return task;
+      return { ...task, content };
+    });
+    setTasks(tasksUpdated);
   }
 }

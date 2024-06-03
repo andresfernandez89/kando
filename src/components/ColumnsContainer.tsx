@@ -9,16 +9,24 @@ import { Button } from "./ui/button";
 
 interface Props {
   column: Column;
+  tasks: Task[];
   deleteColumn: (id: Id) => void;
   updateColumn: (id: Id, title: Column["title"]) => void;
   createTask: (columnId: Id) => void;
-  tasks: Task[];
+  updateTask: (id: Id, content: Task["content"]) => void;
   deleteTask: (id: Id) => void;
 }
 
 export default function ColumnContainer(props: Props) {
-  const { column, deleteColumn, updateColumn, createTask, tasks, deleteTask } =
-    props;
+  const {
+    column,
+    tasks,
+    deleteColumn,
+    updateColumn,
+    createTask,
+    deleteTask,
+    updateTask,
+  } = props;
   const [editMode, setEditMode] = useState<boolean>(false);
 
   const {
@@ -95,7 +103,12 @@ export default function ColumnContainer(props: Props) {
       </div>
       <div className="flex flex-grow flex-col gap-4 overflow-y-auto overflow-x-hidden p-2">
         {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} deleteTask={deleteTask} />
+          <TaskCard
+            key={task.id}
+            task={task}
+            deleteTask={deleteTask}
+            updateTask={updateTask}
+          />
         ))}
       </div>
       <div className="p-2">

@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
-import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
+import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
 import { GoogleSignBTN } from "./google-sign-btn";
-import { useTranslations, useLocale } from "next-intl";
 
 export default function Login() {
   const [error, setError] = useState("");
@@ -60,7 +60,7 @@ export default function Login() {
         </button>
         <p className="font-bold"> O </p>
 
-        <GoogleSignBTN children={t("googleBtn")} />
+        <GoogleSignBTN>{t("googleBtn")}</GoogleSignBTN>
 
         {error && <div className="text-red-500"> * {error}</div>}
       </form>

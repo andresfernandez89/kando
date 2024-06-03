@@ -5,8 +5,8 @@ import { locales } from "@/navigation";
 
 const publicPages = [
   "/",
-  "/login",
-  "/register",
+  "/home/login",
+  "/home/register",
   // (/secret requires auth)
 ];
 
@@ -26,7 +26,7 @@ const authMiddleware = withAuth(
       authorized: ({ token }) => token != null,
     },
     pages: {
-      signIn: "/login",
+      signIn: "/home/login",
     },
   },
 );

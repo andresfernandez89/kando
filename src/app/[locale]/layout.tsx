@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/app/[locale]/providers";
-import { Navbar } from "@/components/nav";
+
 import { NextIntlClientProvider, useMessages } from "next-intl";
 
 const fontSans = FontSans({
@@ -35,8 +35,7 @@ export default function RootLayout({
       >
         <Providers>
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <Navbar />
-            {children}
+            <main>{children}</main>
           </NextIntlClientProvider>
         </Providers>
       </body>

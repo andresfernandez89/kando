@@ -28,7 +28,7 @@ export default function TaskCard({ task, deleteTask, updateTask }: Props) {
           placeholder="Write here"
           onBlur={togleEditMode}
           onKeyDown={(e) => {
-            if (e.key === "Enter" && e.shiftKey) togleEditMode();
+            if (e.key === "Enter") togleEditMode();
           }}
           onChange={(e) => {
             updateTask(task.id, e.target.value);

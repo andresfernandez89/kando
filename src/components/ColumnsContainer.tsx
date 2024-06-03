@@ -100,7 +100,7 @@ export default function ColumnContainer(props: Props) {
           </div>
           <Button
             onClick={() => deleteColumn(column.id)}
-            className="self-end rounded stroke-[#ddd6fe] px-1 py-2 hover:bg-[#8b5cf6] hover:stroke-[#f5f3ff]"
+            className="rounded stroke-gray-500 px-1 py-2 hover:bg-cyan-300 hover:stroke-white"
           >
             <DeleteIcon />
           </Button>

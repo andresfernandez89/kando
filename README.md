@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## KANDO - NEXT JS
 
-## Getting Started
+This application combines a Kanban board and a Todo list for seamless task management. Developed with Next.js and TypeScript, it includes internationalization and authentication features to meet various user requirements. With modern technologies like MongoDB for data storage, bcryptjs for secure authentication, and next-intl for language support.
 
-First, run the development server:
+## Demo
+
+https://kando-nextjs.vercel.app/es/home/login
+
+![GIF demo]()
+
+## Tech Stack
+
+next js, typescript, tailwind, shadcn, mongo db, bcryptjs, next-intl, next-auth, vercel.
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/andresfernandez89/kando-nextjs.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd kando-nextjs
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Environment Variables
 
-## Deploy on Vercel
+To run this project, you will need to add the following environment variables to your **`.env`** file:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`API_URL='http://localhost:3000/api'`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`MONGO_URI=`
+
+`DB_NAME=kando_db`
+
+`GOOGLE_CLIENT_ID=`
+
+`GOOGLE_CLIENT_SECRET=`
+
+`NEXTAUTH_URL=http://localhost:3000`
+
+`NEXTAUTH_SECRET=`
+
+## Authors
+
+- [@andresfernandez89](https://github.com/andresfernandez89)
+- [@Sebailla](https://github.com/Sebailla)

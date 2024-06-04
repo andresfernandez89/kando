@@ -18,12 +18,12 @@ export default function DashboardLayout({
         ></div>
         <div
           id="main-content"
-          className="relative h-full w-full overflow-y-auto bg-gray-50 lg:ml-64"
+          className="relative h-full w-full overflow-y-auto bg-gray-50 lg:ml-48"
         >
           <main>
-            <div className="px-4 pt-6">
+            <div className="w-fit px-4 pt-6">
               <div className="min-h-[calc(100vh-230px)] w-full">
-                <div className="rounded-lg bg-white p-4 shadow sm:p-6 xl:p-8">
+                <div className="w-fit rounded-lg bg-white p-2 shadow sm:p-6 xl:p-8">
                   {children}
                 </div>
               </div>

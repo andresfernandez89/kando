@@ -4,6 +4,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { useTranslations } from "next-intl";
 
 interface Props {
   task: Task;
@@ -14,6 +15,8 @@ interface Props {
 export default function TaskCard({ task, deleteTask, updateTask }: Props) {
   const [mouseIsOver, setMouseIsOver] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
+
+  const t = useTranslations("Column");
 
   const {
     setNodeRef,
@@ -59,9 +62,9 @@ export default function TaskCard({ task, deleteTask, updateTask }: Props) {
       >
         <textarea
           className="h-[90%] w-full resize-none rounded border-none bg-transparent focus:outline-none"
-          value={task.content}
+          //value={task.content}
           autoFocus
-          placeholder="Write here"
+          placeholder={t("txtTask")}
           onBlur={togleEditMode}
           onKeyDown={(e) => {
             if (e.key === "Enter") togleEditMode();
@@ -89,7 +92,7 @@ export default function TaskCard({ task, deleteTask, updateTask }: Props) {
       }}
       className="flex h-[100px] min-h-[100px] cursor-grab flex-col place-content-between items-start rounded bg-[#f3f4f6] p-2 hover:ring-2 hover:ring-inset hover:ring-[#ddd6fe]"
     >
-      <p className="py-auto w-full">{task.content}</p>
+      <p className="py-auto w-full text-[#4b5563]">{t("txtTask")}</p>
       {mouseIsOver && (
         <Button
           onClick={() => deleteTask(task.id)}

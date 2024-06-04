@@ -6,6 +6,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { useMemo, useState } from "react";
 import TaskCard from "./TaskCard";
 import { Button } from "./ui/button";
+import { useTranslations } from "next-intl";
 
 interface Props {
   column: Column;
@@ -18,6 +19,8 @@ interface Props {
 }
 
 export default function ColumnContainer(props: Props) {
+  const t = useTranslations("Column");
+
   const {
     column,
     tasks,
@@ -57,7 +60,7 @@ export default function ColumnContainer(props: Props) {
       <div
         ref={setNodeRef}
         style={style}
-        className="flex h-[500px] max-h-[500px] w-[272px] flex-col rounded-md border-4 bg-card opacity-40"
+        className="border-prymary flex h-[550px] max-h-[550px] w-[272px] flex-col rounded-lg border-[1px] bg-card opacity-40"
       ></div>
     );
   }
@@ -66,7 +69,7 @@ export default function ColumnContainer(props: Props) {
     <div
       ref={setNodeRef}
       style={style}
-      className="flex h-[500px] max-h-[500px] w-[272px] flex-col rounded-md border-4 bg-card"
+      className="border-prymary flex h-[550px] max-h-[550px] w-[272px] flex-col rounded-lg border-[1px] bg-card"
     >
       <div
         {...attributes}
@@ -74,20 +77,21 @@ export default function ColumnContainer(props: Props) {
         onClick={() => {
           setEditMode(true);
         }}
-        className="text-md flex h-[56px] w-full cursor-grab items-center justify-between rounded-[1px] rounded-b-none bg-primary p-3 font-bold"
+        className="text-md flex h-[45px] w-full cursor-grab items-center justify-between rounded-md rounded-b-none border-primary bg-primary p-3 font-bold"
       >
         <div className="flex w-full items-center gap-2 text-primary-foreground">
-          <div className="flex items-center justify-center rounded border bg-[#ddd6fe] p-2 text-sm text-[#09090b]">
+          {/* <div className="flex items-center justify-center rounded border bg-[#ddd6fe] p-2 text-sm text-[#09090b]">
             0
-          </div>
+          </div> */}
 
           <div className="w-full flex-grow">
             {!editMode ? (
               column.title
             ) : (
               <input
-                className="rounded border-2 py-1 pl-1 text-base font-medium text-[#f5f3ff] outline-none focus:w-full focus:border-[#ddd6fe] focus:bg-[#8b5cf6]"
-                value={column.title}
+                className="rounded border-2 py-1 pl-1 text-base font-medium text-[#f5f3ff] outline-none focus:w-full focus:border-[#8b5cf6] focus:bg-[#8b5cf6]"
+                placeholder={t("colTitle")}
+                //value={column.title}
                 onChange={(e) => updateColumn(column.id, e.target.value)}
                 autoFocus
                 onBlur={() => setEditMode(false)}
@@ -100,7 +104,7 @@ export default function ColumnContainer(props: Props) {
           </div>
           <Button
             onClick={() => deleteColumn(column.id)}
-            className="rounded stroke-gray-500 px-1 py-2 hover:bg-cyan-300 hover:stroke-white"
+            className="rounded stroke-rose-300 px-1 py-2 hover:bg-rose-100 hover:stroke-red-500"
           >
             <DeleteIcon />
           </Button>
@@ -124,7 +128,7 @@ export default function ColumnContainer(props: Props) {
           className="flex w-full items-center justify-start gap-1 bg-[#fff] text-[#09090b] hover:rounded hover:bg-[#f1f5f9]"
         >
           <AddIcon />
-          Add task
+          {t("addTaskBtn")}
         </Button>
       </div>
     </div>

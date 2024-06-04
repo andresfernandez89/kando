@@ -8,7 +8,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="mx-4 my-6 rounded-lg bg-white p-4 shadow md:flex md:items-center md:justify-between md:p-6 xl:p-8">
+      <footer className="mx-4 mt-6 rounded-lg bg-white p-4 shadow md:flex md:items-center md:justify-between md:p-4 xl:p-6">
         <ul className="mb-6 flex flex-wrap items-center md:mb-0">
           <li>
             <Link
@@ -72,12 +72,12 @@ export default function Footer() {
           </Link>
         </div>
       </footer>
-      <p className="my-10 text-center text-sm text-gray-500">
+      <p className="my-6 text-center text-sm text-gray-500">
         &copy; 2024 -{" "}
         <Link href="#" className="hover:underline" target="_blank">
           Andres Fernandez - Sebastián Illa
         </Link>
-        . {t("reserved")}.
+        - {t("reserved")}.
       </p>
     </>
   );

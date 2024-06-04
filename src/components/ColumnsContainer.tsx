@@ -125,7 +125,7 @@ export default function ColumnContainer(props: Props) {
       <div className="p-2">
         <Button
           onClick={() => createTask(column.id)}
-          className="flex w-full items-center justify-start gap-1 bg-[#fff] text-[#09090b] hover:rounded hover:bg-[#f1f5f9]"
+          className="flex w-full items-center justify-start gap-1 rounded-md bg-[#fff] text-[#09090b] hover:bg-[#f1f5f9]"
         >
           <AddIcon />
           {t("addTaskBtn")}

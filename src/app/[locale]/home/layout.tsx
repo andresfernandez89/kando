@@ -1,3 +1,5 @@
+import LocaleSwitchBtn from "@/components/locale-switch-btn";
+
 export default function HomeLayout({
   children,
 }: {
@@ -34,8 +36,9 @@ export default function HomeLayout({
               <li></li>
             </ul>
           </div>
-          <div className="w-2/5 bg-white p-8 sm:w-auto sm:rounded-lg md:flex md:h-full md:flex-col md:items-center  md:justify-center md:rounded-none md:p-10 lg:p-14 xl:w-2/5">
-            {children}
+          <div className="w-full bg-white sm:w-auto sm:rounded-lg md:flex md:h-full md:flex-col md:rounded-none xl:w-2/5 ">
+            <LocaleSwitchBtn />
+            <div className="p-8">{children}</div>
           </div>
         </div>
       </div>

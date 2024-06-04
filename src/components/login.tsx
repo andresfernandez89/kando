@@ -29,9 +29,7 @@ export default function Login() {
   return (
     <section className="flex w-full max-w-sm flex-col items-center justify-items-center gap-10 p-5 md:max-w-3xl md:p-10">
       <article className="flex items-center justify-center">
-        <h1 className="mb-16 mt-12 text-xl font-bold md:text-3xl">
-          {t("title")}
-        </h1>
+        <h1 className="mb-6 mt-12 text-3xl font-bold md:mb-16">{t("title")}</h1>
       </article>
       <form
         className="flex w-5/6 flex-col items-center justify-center gap-5 md:w-96"
@@ -63,12 +61,12 @@ export default function Login() {
         {error && <div className="text-red-500"> * {error}</div>}
       </form>
 
-      <article className="my-5 flex flex-col justify-items-center gap-5">
+      <article className="my-5 flex flex-col justify-items-center gap-4">
         <p className="text-sm">
           {t("notCount")}
           <Link
             href={"/home/register"}
-            className="ms-5 text-teal-500 hover:font-bold hover:text-teal-300"
+            className="ms-3 text-teal-500 hover:font-bold hover:text-teal-300"
           >
             {t("register")}
           </Link>
@@ -77,7 +75,7 @@ export default function Login() {
           {t("passForgot")}
           <Link
             href="#"
-            className="ms-5 text-teal-500 hover:font-bold hover:text-teal-300"
+            className="ms-2 text-teal-500 hover:font-bold hover:text-teal-300 md:ms-3"
           >
             {t("passRecovery")}
           </Link>

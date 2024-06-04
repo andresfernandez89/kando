@@ -26,7 +26,8 @@
     "btnGoBack": "Regresar a Inicio"
   },
   "LocaleSwitcher": {
-    "switch": "Ingles",
+    "label": "Change language",
+    "switch": "English",
     "switchLocale": "{locale, select, es {🇪🇸} en {🇺🇸} other {Unknown}}"
   },
   "Blog": {

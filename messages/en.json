@@ -28,7 +28,7 @@
     "btnGoBack": "Go back to the home page"
   },
   "LocaleSwitcher": {
-    "switch": "Spanish",
+    "switch": "Español",
     "switchLocale": "{locale, select, es {🇪🇸} en {🇺🇸} other {Unknown}}"
   },
   "Blog": {

@@ -24,8 +24,6 @@ export default function Login() {
     });
     if (res?.error) return setError(res.error as string);
     if (res?.ok) return router.push(`/dashboard/board`);
-
-    console.log(res);
   };
 
   return (

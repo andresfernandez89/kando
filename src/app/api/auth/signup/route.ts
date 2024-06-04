@@ -37,7 +37,6 @@ export async function POST(req: Request) {
     });
 
     const savedUser = await newUser.save();
-    console.log(savedUser);
 
     return NextResponse.json({
       _id: savedUser._id,
@@ -47,7 +46,6 @@ export async function POST(req: Request) {
       role: savedUser.role,
     });
   } catch (error) {
-    console.log(error);
     if (error instanceof Error) {
       return NextResponse.json({ msg: error.message }, { status: 400 });
     }

@@ -1,10 +1,10 @@
 "use client";
 import axios, { AxiosError } from "axios";
-import Link from "next/link";
-import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
+import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useTranslations, useLocale } from "next-intl";
+import { FormEvent, useState } from "react";
 
 export function Register() {
   const [error, setError] = useState();
@@ -30,8 +30,6 @@ export function Register() {
         redirect: false,
       });
       if (res?.ok) return router.push("/");
-      console.log(signupResponse);
-      console.log(res);
     } catch (error) {
       if (error instanceof AxiosError) {
         setError(error.response?.data.msg);

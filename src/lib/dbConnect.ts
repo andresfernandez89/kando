@@ -12,11 +12,9 @@ export const dbConnect = async () => {
   try {
     const { connection } = await mongoose.connect(MONGO_URI as string);
     if (connection.readyState === 1) {
-      console.log("MongoDB connected OK");
       return Promise.resolve(true);
     }
   } catch (error) {
-    console.log(error);
     return Promise.reject(false);
   }
 };

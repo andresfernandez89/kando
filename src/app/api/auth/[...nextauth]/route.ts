@@ -1,9 +1,9 @@
-import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
 import { dbConnect } from "@/lib/dbConnect";
 import User from "@/models/user.model";
 import bcrypt from "bcryptjs";
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 const handler = NextAuth({
   providers: [
@@ -31,8 +31,6 @@ const handler = NextAuth({
           userFound.password,
         );
         if (!passwordMatch) throw new Error("Invalid Credentials");
-
-        console.log(userFound);
 
         return userFound;
       },

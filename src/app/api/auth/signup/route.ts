@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import User from "../../../../models/user.model";
+import { dbConnect } from "@/lib/dbConnect";
+import User from "@/models/user.model";
 import bcrypt from "bcryptjs";
-import { dbConnect } from "../../../../lib/dbConnect";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   const { firstName, lastName, email, password, image } = await req.json();
@@ -37,7 +37,6 @@ export async function POST(req: Request) {
     });
 
     const savedUser = await newUser.save();
-    console.log(savedUser);
 
     return NextResponse.json({
       _id: savedUser._id,
@@ -47,7 +46,6 @@ export async function POST(req: Request) {
       role: savedUser.role,
     });
   } catch (error) {
-    console.log(error);
     if (error instanceof Error) {
       return NextResponse.json({ msg: error.message }, { status: 400 });
     }

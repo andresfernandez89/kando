@@ -1,7 +1,7 @@
-import { NextRequest } from "next/server";
+import { locales } from "@/navigation";
 import { withAuth } from "next-auth/middleware";
 import createIntlMiddleware from "next-intl/middleware";
-import { locales } from "@/navigation";
+import { NextRequest } from "next/server";
 
 const publicPages = [
   "/",
@@ -17,10 +17,14 @@ const intlMiddleware = createIntlMiddleware({
 });
 
 const authMiddleware = withAuth(
-  // Note that this callback is only invoked if
-  // the `authorized` callback has returned `true`
-  // and not for pages listed in `pages`.
-  (req) => intlMiddleware(req),
+  (req) => {
+    const res = intlMiddleware(req);
+    if (res) {
+      return res;
+    } else {
+      return res;
+    }
+  },
   {
     callbacks: {
       authorized: ({ token }) => token != null,

@@ -1,13 +1,9 @@
-import LocaleSwitchBtn from "@/components/locale-switch-btn";
-import "../home.css";
 import Login from "@/components/login";
+import "../home.css";
 export default function LoginPage() {
   return (
-    <section>
-      <LocaleSwitchBtn />
-      <div className="w-full max-w-md">
-        <Login />
-      </div>
+    <section className="m-auto w-full max-w-md">
+      <Login />
     </section>
   );
 }

@@ -19,6 +19,14 @@
     "terms": "Terminos y Condiciones",
     "reserved": "Todos los derechos reservados"
   },
+  "Board": {
+    "addColBtn": "Agregar Columna"
+  },
+  "Column": {
+    "addTaskBtn": "Agregar Tarea",
+    "txtTask": "Describe tu tarea",
+    "colTitle": "Agrega Título"
+  },
 
   "notFound": {
     "404": "404 - Página no se encontro",

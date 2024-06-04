@@ -12,7 +12,7 @@ export default function Aside() {
   return (
     <aside
       id="sidebar"
-      className="transition-width fixed left-0 top-0 z-20 hidden h-full w-64 flex-shrink-0 flex-col pt-16 duration-75 lg:flex"
+      className="transition-width w-fil fixed left-0 top-0 z-20 hidden h-full flex-shrink-0 flex-col pt-16 duration-75 lg:flex"
       aria-label="Sidebar"
     >
       <div className="borderR relative flex min-h-0 flex-1 flex-col border-gray-200 bg-white pt-0">

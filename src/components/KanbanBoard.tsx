@@ -18,6 +18,7 @@ import { useMemo, useState } from "react";
 import ColumnContainer from "./ColumnsContainer";
 import TaskCard from "./TaskCard";
 import { Button } from "./ui/button";
+import { useTranslations } from "next-intl";
 
 export default function KanbanBoard() {
   const [columns, setColumns] = useState<Column[]>([]);
@@ -31,8 +32,10 @@ export default function KanbanBoard() {
     useSensor(PointerSensor, { activationConstraint: { distance: 3 } }),
   );
 
+  const t = useTranslations("Board");
+
   return (
-    <div className="m-auto flex min-h-screen w-full items-center overflow-x-auto overflow-y-hidden px-10">
+    <div className="m-auto w-full">
       <DndContext
         sensors={sensors}
         onDragStart={onDragStart}
@@ -58,10 +61,11 @@ export default function KanbanBoard() {
           </div>
           <Button
             onClick={() => createNewColumn()}
-            className="flex h-[62px] w-[272px] min-w-[272px] cursor-pointer gap-2 rounded-md border-2 p-4"
+            variant={"board"}
+            className="flex h-[45px] w-[272px] min-w-[272px] cursor-pointer gap-2 rounded-lg border-2 p-4"
           >
             <AddIcon />
-            Add Column
+            {t("addColBtn")}
           </Button>
         </div>
         <UseClientOnlyPortal>
@@ -204,5 +208,4 @@ export default function KanbanBoard() {
     });
     setTasks(tasksUpdated);
   }
-
 }

@@ -1,8 +1,8 @@
+import { Providers } from "@/app/[locale]/providers";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
-import { Providers } from "@/app/[locale]/providers";
 
 import { NextIntlClientProvider, useMessages } from "next-intl";
 
@@ -24,21 +24,22 @@ export default function RootLayout({
   params: { locale: string };
 }>) {
   const messages = useMessages();
-
-  return (
-    <html lang={locale}>
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
-        )}
-      >
-        <Providers>
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            <main>{children}</main>
-          </NextIntlClientProvider>
-        </Providers>
-      </body>
-    </html>
-  );
+  if (process.env.NEXTAUTH_URL)
+    return (
+      <html lang={locale}>
+        <body
+          className={cn(
+            "min-h-screen bg-background font-sans antialiased",
+            fontSans.variable,
+          )}
+        >
+          <Providers>
+            <NextIntlClientProvider locale={locale} messages={messages}>
+              <main>{children}</main>
+            </NextIntlClientProvider>
+          </Providers>
+        </body>
+      </html>
+    );
+  throw new Error("Some env variables not set");
 }

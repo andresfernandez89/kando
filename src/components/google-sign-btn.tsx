@@ -1,7 +1,7 @@
 "use client";
-import { FC, ReactNode, useState } from "react";
-import { signIn } from "next-auth/react";
 import SpinIcon from "@/icons/spinIcon";
+import { signIn } from "next-auth/react";
+import { FC, ReactNode, useState } from "react";
 
 interface googleSignInBtnProps {
   children: ReactNode;
@@ -13,7 +13,7 @@ export const GoogleSignBTN: FC<googleSignInBtnProps> = ({ children }) => {
   const LoginwithGoogle = async () => {
     try {
       setIsLoading(true);
-      await signIn("google", { callbackUrl: "http://localhost:3000" });
+      await signIn("google", { callbackUrl: "/" });
     } catch (error) {
       setIsLoading(false);
     } finally {

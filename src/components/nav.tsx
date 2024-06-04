@@ -1,7 +1,7 @@
 "use client";
-import { useSession, signOut } from "next-auth/react";
-import { useLocale, useTranslations } from "next-intl";
 import LocaleSwitchBtn from "@/components/locale-switch-btn";
+import { signOut, useSession } from "next-auth/react";
+import { useLocale, useTranslations } from "next-intl";
 
 export function Navbar() {
   const { data: session } = useSession();
@@ -52,7 +52,7 @@ export function Navbar() {
             >
               {/* Logo */}
 
-              <span className="ml-2 self-center whitespace-nowrap"> Kando</span>
+              <span className="ml-2 self-center whitespace-nowrap">Kando</span>
             </a>
           </div>
 

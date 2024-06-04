@@ -1,4 +1,5 @@
 import { Providers } from "@/app/[locale]/providers";
+import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
@@ -33,11 +34,18 @@ export default function RootLayout({
             fontSans.variable,
           )}
         >
-          <Providers>
-            <NextIntlClientProvider locale={locale} messages={messages}>
-              <main>{children}</main>
-            </NextIntlClientProvider>
-          </Providers>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Providers>
+              <NextIntlClientProvider locale={locale} messages={messages}>
+                <main>{children}</main>
+              </NextIntlClientProvider>
+            </Providers>
+          </ThemeProvider>
         </body>
       </html>
     );

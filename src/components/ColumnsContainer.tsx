@@ -3,10 +3,10 @@ import DeleteIcon from "@/icons/deleteIcon";
 import type { Column, Id, Task } from "@/types/kanbanBoard";
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import TaskCard from "./TaskCard";
 import { Button } from "./ui/button";
-import { useTranslations } from "next-intl";
 
 interface Props {
   column: Column;

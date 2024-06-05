@@ -35,7 +35,7 @@ export default function KanbanBoard() {
   const t = useTranslations("Board");
 
   return (
-    <div className="m-auto w-full overflow-x-auto overflow-y-hidden">
+    <div className="m-auto w-[332px] max-w-[332px] overflow-x-auto overflow-y-hidden md:w-[896px] md:max-w-2xl lg:w-[1280px] lg:max-w-7xl">
       <DndContext
         sensors={sensors}
         onDragStart={onDragStart}
@@ -43,7 +43,7 @@ export default function KanbanBoard() {
         onDragOver={onDragOver}
       >
         <div className="m-auto flex gap-4">
-          <div className="flex gap-4">
+          <div className="flex gap-2 md:gap-4">
             <SortableContext items={columnsId}>
               {columns.map((col) => (
                 <ColumnContainer

@@ -77,7 +77,7 @@ export default function ColumnContainer(props: Props) {
         onClick={() => {
           setEditMode(true);
         }}
-        className="text-md flex h-[45px] w-full cursor-grab items-center justify-between rounded-md rounded-b-none border-primary bg-primary p-3 font-bold"
+        className="text-md flex h-[45px] w-full cursor-grab items-center justify-between rounded-md rounded-b-none border-primary bg-violet-500 p-3 font-bold"
       >
         <div className="flex w-full items-center gap-2 text-primary-foreground">
           {/* <div className="flex items-center justify-center rounded border bg-[#ddd6fe] p-2 text-sm text-[#09090b]">
@@ -89,7 +89,7 @@ export default function ColumnContainer(props: Props) {
               column.title
             ) : (
               <input
-                className="rounded border-2 py-1 pl-1 text-base font-medium text-[#f5f3ff] outline-none focus:w-full focus:border-[#8b5cf6] focus:bg-[#8b5cf6]"
+                className="rounded border-2 py-1 pl-1 text-base font-medium text-[#f5f3ff] outline-none focus:w-full focus:border-violet-600 focus:bg-violet-400"
                 placeholder={t("colTitle")}
                 //value={column.title}
                 onChange={(e) => updateColumn(column.id, e.target.value)}
@@ -104,7 +104,7 @@ export default function ColumnContainer(props: Props) {
           </div>
           <Button
             onClick={() => deleteColumn(column.id)}
-            className="rounded stroke-rose-300 px-1 py-2 hover:bg-rose-100 hover:stroke-red-500"
+            className="rounded bg-violet-500 stroke-violet-200 px-1 py-2 hover:bg-violet-500 hover:stroke-red-500"
           >
             <DeleteIcon />
           </Button>
@@ -125,7 +125,7 @@ export default function ColumnContainer(props: Props) {
       <div className="p-2">
         <Button
           onClick={() => createTask(column.id)}
-          className="flex w-full items-center justify-start gap-1 rounded-md bg-[#fff] text-[#09090b] hover:bg-[#f1f5f9]"
+          className="flex w-full items-center justify-start gap-1 rounded-md bg-[#fff] text-[#09090b] hover:bg-violet-100"
         >
           <AddIcon />
           {t("addTaskBtn")}

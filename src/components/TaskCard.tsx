@@ -96,7 +96,7 @@ export default function TaskCard({ task, deleteTask, updateTask }: Props) {
       {mouseIsOver && (
         <Button
           onClick={() => deleteTask(task.id)}
-          className="block self-end rounded bg-card stroke-[#4b5563] p-2 hover:bg-card"
+          className="block self-end rounded bg-[#f3f4f6] stroke-[#4b5563] p-2 hover:bg-[#f3f4f6] hover:stroke-red-500"
         >
           <DeleteIcon />
         </Button>

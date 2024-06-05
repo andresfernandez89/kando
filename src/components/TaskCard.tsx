@@ -2,9 +2,9 @@ import DeleteIcon from "@/icons/deleteIcon";
 import type { Id, Task } from "@/types/kanbanBoard";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { useTranslations } from "next-intl";
 
 interface Props {
   task: Task;
@@ -61,10 +61,10 @@ export default function TaskCard({ task, deleteTask, updateTask }: Props) {
         className="flex h-[100px] min-h-[100px] cursor-grab flex-col place-content-between items-start rounded bg-[#f3f4f6] p-2 hover:ring-2 hover:ring-inset hover:ring-[#ddd6fe]"
       >
         <textarea
-          className="h-[90%] w-full resize-none rounded border-none bg-transparent focus:outline-none"
-          //value={task.content}
+          className="h-[90%] w-full resize-none rounded border-none bg-transparent text-[#4b5563] focus:outline-none"
+          value={task.content.length > 0 ? task.content : ""}
           autoFocus
-          placeholder={t("txtTask")}
+          placeholder={task.content.length <= 0 ? t("txtTask") : ""}
           onBlur={togleEditMode}
           onKeyDown={(e) => {
             if (e.key === "Enter") togleEditMode();
@@ -92,7 +92,9 @@ export default function TaskCard({ task, deleteTask, updateTask }: Props) {
       }}
       className="flex h-[100px] min-h-[100px] cursor-grab flex-col place-content-between items-start rounded bg-[#f3f4f6] p-2 hover:ring-2 hover:ring-inset hover:ring-[#ddd6fe]"
     >
-      <p className="py-auto w-full text-[#4b5563]">{t("txtTask")}</p>
+      <p className="py-auto w-full text-[#4b5563]">
+        {task.content.length > 0 && task.content}
+      </p>
       {mouseIsOver && (
         <Button
           onClick={() => deleteTask(task.id)}

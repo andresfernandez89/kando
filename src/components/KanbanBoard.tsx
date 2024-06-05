@@ -14,11 +14,11 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import ColumnContainer from "./ColumnsContainer";
 import TaskCard from "./TaskCard";
 import { Button } from "./ui/button";
-import { useTranslations } from "next-intl";
 
 export default function KanbanBoard() {
   const [columns, setColumns] = useState<Column[]>([]);
@@ -35,7 +35,7 @@ export default function KanbanBoard() {
   const t = useTranslations("Board");
 
   return (
-    <div className="m-auto w-full">
+    <div className="m-auto w-full overflow-x-auto overflow-y-hidden">
       <DndContext
         sensors={sensors}
         onDragStart={onDragStart}
@@ -190,7 +190,7 @@ export default function KanbanBoard() {
     const newTask: Task = {
       id: generateId(),
       columnId,
-      content: `Task ${tasks.length + 1}`,
+      content: "",
     };
 
     setTasks([...tasks, newTask]);

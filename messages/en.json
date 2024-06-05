@@ -28,7 +28,7 @@
   },
   "Column": {
     "addTaskBtn": "Add Task",
-    "txtTask": "White Here",
+    "txtTask": "Write your task here",
     "colTitle": "Add Title"
   },
   "notFound": {

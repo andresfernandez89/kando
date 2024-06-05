@@ -29,7 +29,7 @@
   "Column": {
     "addTaskBtn": "Add Task",
     "txtTask": "Write your task here",
-    "colTitle": "Add Title"
+    "colTitle": "Add a title ... "
   },
   "notFound": {
     "404": "404 - Page Not Found",

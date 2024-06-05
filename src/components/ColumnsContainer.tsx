@@ -86,10 +86,10 @@ export default function ColumnContainer(props: Props) {
 
           <div className="w-full flex-grow">
             {!editMode ? (
-              column.title
+              <div className="">{column.title}</div>
             ) : (
               <input
-                className="rounded border-2 py-1 pl-1 text-base font-medium text-[#f5f3ff] outline-none focus:w-full focus:border-violet-600 focus:bg-violet-400"
+                className="titleColumn-placeholder rounded border-2 py-1 pl-1 text-base font-medium outline-none focus:w-full focus:border-violet-600 focus:bg-violet-400 "
                 placeholder={t("colTitle")}
                 //value={column.title}
                 onChange={(e) => updateColumn(column.id, e.target.value)}

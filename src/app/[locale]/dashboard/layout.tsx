@@ -1,6 +1,6 @@
-import { Navbar } from "@/components/nav";
 import Aside from "@/components/aside-dashboar";
 import Footer from "@/components/footer-dashboard";
+import { Navbar } from "@/components/nav";
 
 export default function DashboardLayout({
   children,
@@ -21,9 +21,9 @@ export default function DashboardLayout({
           className="relative h-full w-full overflow-y-auto bg-background lg:ml-48"
         >
           <main>
-            <div className="w-fit px-4 pt-6">
-              <div className="min-h-[calc(100vh-230px)] w-full bg-background">
-                <div className="w-fit rounded-lg bg-secondary p-2 shadow sm:p-6 xl:p-8">
+            <div className="m-auto w-fit px-4 pt-6">
+              <div className="w-full bg-background">
+                <div className="h-[580px] w-fit rounded-lg bg-secondary p-2 shadow max-md:pt-4 sm:p-6 md:h-[614px] xl:p-8">
                   {children}
                 </div>
               </div>

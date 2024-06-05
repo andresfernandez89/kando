@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { GoogleSignBTN } from "./google-sign-btn";
+import GoogleIcon from "@/icons/goggleIcon";
 
 export default function Login() {
   const [error, setError] = useState("");
@@ -49,7 +50,7 @@ export default function Login() {
         />
 
         <button
-          className="mt-10 w-full rounded-[12px] bg-rose-500 px-5 py-2 text-xl font-bold text-rose-100 hover:bg-rose-300 hover:text-rose-700"
+          className="mt-10 w-full rounded-[12px] bg-violet-500 px-5 py-2 text-xl font-bold text-violet-100 hover:bg-violet-300 hover:text-violet-700"
           type="submit"
         >
           {t("loginBtn")}

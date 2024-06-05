@@ -1,4 +1,5 @@
 import LocaleSwitchBtn from "@/components/locale-switch-btn";
+import { ModeToggleTheme } from "@/components/modeToggleTheme";
 
 export default function HomeLayout({
   children,
@@ -36,9 +37,12 @@ export default function HomeLayout({
               <li></li>
             </ul>
           </div>
-          <div className="w-full bg-white sm:w-auto sm:rounded-lg md:flex md:h-full md:flex-col md:rounded-none xl:w-2/5 ">
-            <LocaleSwitchBtn />
-            <div className="p-8">{children}</div>
+          <div className="w-full bg-background sm:w-auto sm:rounded-lg md:flex md:h-full md:flex-col md:rounded-none xl:w-2/5 ">
+            <div className="mr-3 mt-3 flex justify-end gap-3">
+              <LocaleSwitchBtn />
+              <ModeToggleTheme />
+            </div>
+            <div className="p-6">{children}</div>
           </div>
         </div>
       </div>

@@ -74,10 +74,11 @@ export function Navbar() {
             </div>
             {/* User Avatar */}
             <Avatar>
-              <AvatarImage src={session?.user?.image} alt="@shadcn" />
+              <AvatarImage src={session?.user?.image ?? ""} alt="@shadcn" />
               <AvatarFallback>
-                {`${session?.user?.firstName[0].toLocaleUpperCase()}${session?.user?.lastName[0].toLocaleUpperCase()}` ||
-                  `${session?.user?.email[0].toLocaleUpperCase()}`}
+                {session?.user?.email
+                  ? `${session.user.email[0].toLocaleUpperCase()}`
+                  : ""}
               </AvatarFallback>
             </Avatar>
             <div className="flex items-center gap-4">

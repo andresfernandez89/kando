@@ -2,6 +2,8 @@
 import LocaleSwitchBtn from "@/components/locale-switch-btn";
 import { signOut, useSession } from "next-auth/react";
 import { useLocale, useTranslations } from "next-intl";
+import { ModeToggleTheme } from "./modeToggleTheme";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export function Navbar() {
   const { data: session } = useSession();
@@ -9,7 +11,7 @@ export function Navbar() {
   const locale = useLocale();
 
   return (
-    <nav className="fixed z-30 w-full border-b border-gray-200 bg-white">
+    <nav className="fixed z-30 w-full border-b border-background bg-background">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start">
@@ -56,27 +58,31 @@ export function Navbar() {
             </a>
           </div>
 
-          <div className="mr-5 flex justify-end gap-5">
-            <button
-              className="text-md relative m-1 flex px-2 py-1 align-middle font-bold text-violet-500 hover:border-b-2 hover:border-violet-400 hover:text-violet-300 dark:text-violet-400 dark:hover:text-neutral-200"
-              onClick={async () => {
-                await signOut({
-                  callbackUrl: "/",
-                });
-              }}
-              type="button"
-            >
-              {t("logout")}
-            </button>
-          </div>
-
           <div className="flex items-center gap-4">
-            {/* User Avatar */}
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500 p-2 text-white">
-              SI
+            <div className="mr-5 flex justify-end gap-5">
+              <button
+                className="text-md relative m-1 flex px-2 py-1 align-middle font-bold text-violet-500 hover:text-violet-300 dark:text-violet-400 dark:hover:text-neutral-200"
+                onClick={async () => {
+                  await signOut({
+                    callbackUrl: "/",
+                  });
+                }}
+                type="button"
+              >
+                {t("logout")}
+              </button>
             </div>
-            <div className="flex items-center">
+            {/* User Avatar */}
+            <Avatar>
+              <AvatarImage src={session?.user?.image} alt="@shadcn" />
+              <AvatarFallback>
+                {`${session?.user?.firstName[0].toLocaleUpperCase()}${session?.user?.lastName[0].toLocaleUpperCase()}` ||
+                  `${session?.user?.email[0].toLocaleUpperCase()}`}
+              </AvatarFallback>
+            </Avatar>
+            <div className="flex items-center gap-4">
               <LocaleSwitchBtn />
+              <ModeToggleTheme />
             </div>
           </div>
         </div>

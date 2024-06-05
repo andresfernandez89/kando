@@ -8,12 +8,12 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="mx-4 mt-6 rounded-lg bg-white p-4 shadow md:flex md:items-center md:justify-between md:p-4 xl:p-6">
+      <footer className="mx-4 mt-6 rounded-lg bg-muted p-4 shadow md:flex md:items-center md:justify-between md:p-4 xl:p-6">
         <ul className="mb-6 flex flex-wrap items-center md:mb-0">
           <li>
             <Link
               href="#"
-              className="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6"
+              className="mr-4 text-sm font-normal text-gray-400 hover:underline md:mr-6"
             >
               {t("terms")}
             </Link>
@@ -21,7 +21,7 @@ export default function Footer() {
           <li>
             <Link
               href="#"
-              className="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6"
+              className="mr-4 text-sm font-normal text-gray-400 hover:underline md:mr-6"
             >
               {t("privacy")}
             </Link>
@@ -29,7 +29,7 @@ export default function Footer() {
           <li>
             <Link
               href="#"
-              className="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6"
+              className="mr-4 text-sm font-normal text-gray-400 hover:underline md:mr-6"
             >
               {t("licensing")}
             </Link>
@@ -37,7 +37,7 @@ export default function Footer() {
           <li>
             <Link
               href="#"
-              className="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6"
+              className="mr-4 text-sm font-normal text-gray-400 hover:underline md:mr-6"
             >
               {t("cookie")}
             </Link>
@@ -45,34 +45,25 @@ export default function Footer() {
           <li>
             <Link
               href="#"
-              className="text-sm font-normal text-gray-500 hover:underline"
+              className="text-sm font-normal text-gray-400 hover:underline"
             >
               {t("contact")}
             </Link>
           </li>
         </ul>
         <div className="flex space-x-6 sm:justify-center">
-          <Link
-            href="https://facebook.com"
-            className="text-gray-500 hover:text-gray-900"
-          >
+          <Link href="https://facebook.com" className="hover:text-violet-300">
             <FbIcon />
           </Link>
-          <Link
-            href="https://instagram.com"
-            className="text-gray-500 hover:text-gray-900"
-          >
+          <Link href="https://instagram.com" className="hover:text-violet-300">
             <InstabramIcon />
           </Link>
-          <Link
-            href="https://github.com"
-            className="text-gray-500 hover:text-gray-900"
-          >
+          <Link href="https://github.com" className="hover:text-violet-300">
             <GitHubIcon />
           </Link>
         </div>
       </footer>
-      <p className="my-6 text-center text-sm text-gray-500">
+      <p className="my-6 text-center text-sm text-violet-400">
         &copy; 2024 -{" "}
         <Link href="#" className="hover:underline" target="_blank">
           Andres Fernandez - Sebastián Illa

@@ -68,3 +68,7 @@
 ::-webkit-scrollbar-thumb {
   @apply rounded-xl bg-[#9ca3af];
 }
+
+.titleColumn-placeholder::placeholder {
+  @apply text-[#f9fafb];
+}

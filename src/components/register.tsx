@@ -78,7 +78,7 @@ export function Register() {
         />
 
         <button
-          className="w-full rounded-[12px] bg-rose-500 px-5 py-2 text-xl font-bold text-rose-100 hover:bg-rose-300 hover:text-rose-700"
+          className="w-full rounded-[12px] bg-violet-500 px-5 py-2 text-xl font-bold text-violet-100 hover:bg-violet-300 hover:text-violet-700"
           type="submit"
         >
           {t("registerBtn")}

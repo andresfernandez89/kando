@@ -17,14 +17,10 @@ const intlMiddleware = createIntlMiddleware({
 });
 
 const authMiddleware = withAuth(
-  (req) => {
-    const res = intlMiddleware(req);
-    if (res) {
-      return res;
-    } else {
-      return res;
-    }
-  },
+  // Note that this callback is only invoked if
+  // the `authorized` callback has returned `true`
+  // and not for pages listed in `pages`.
+  (req) => intlMiddleware(req),
   {
     callbacks: {
       authorized: ({ token }) => token != null,
@@ -44,8 +40,10 @@ export default function middleware(req: NextRequest) {
   );
   const isPublicPage = publicPathnameRegex.test(req.nextUrl.pathname);
 
+  const res = intlMiddleware(req);
+
   if (isPublicPage) {
-    return intlMiddleware(req);
+    return res;
   } else {
     return (authMiddleware as any)(req);
   }

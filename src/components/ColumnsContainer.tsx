@@ -1,5 +1,6 @@
 import AddIcon from "@/icons/AddIcon";
 import DeleteIcon from "@/icons/deleteIcon";
+import { IColumn } from "@/models/column.model";
 import type { Column, Id, Task } from "@/types/kanbanBoard";
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -9,7 +10,7 @@ import TaskCard from "./TaskCard";
 import { Button } from "./ui/button";
 
 interface Props {
-  column: Column;
+  column: IColumn;
   tasks: Task[];
   deleteColumn: (id: Id) => void;
   updateColumn: (id: Id, title: Column["title"]) => void;
@@ -45,7 +46,7 @@ export default function ColumnContainer(props: Props) {
     transition,
     isDragging,
   } = useSortable({
-    id: column.id,
+    id: column._id,
     data: {
       type: "Column",
       column,
@@ -92,7 +93,7 @@ export default function ColumnContainer(props: Props) {
                 className="titleColumn-placeholder rounded border-2 py-1 pl-1 text-base font-medium outline-none focus:w-full focus:border-violet-600 focus:bg-violet-400 "
                 placeholder={t("colTitle")}
                 //value={column.title}
-                onChange={(e) => updateColumn(column.id, e.target.value)}
+                onChange={(e) => updateColumn(column._id, e.target.value)}
                 autoFocus
                 onBlur={() => setEditMode(false)}
                 onKeyDown={(e) => {
@@ -103,7 +104,7 @@ export default function ColumnContainer(props: Props) {
             )}
           </div>
           <Button
-            onClick={() => deleteColumn(column.id)}
+            onClick={() => deleteColumn(column._id)}
             className="rounded bg-violet-500 stroke-violet-200 px-1 py-2 hover:bg-violet-500 hover:stroke-red-500"
           >
             <DeleteIcon />
@@ -124,7 +125,7 @@ export default function ColumnContainer(props: Props) {
       </div>
       <div className="p-2">
         <Button
-          onClick={() => createTask(column.id)}
+          onClick={() => createTask(column._id)}
           className="flex w-full items-center justify-start gap-1 rounded-md bg-[#fff] text-[#09090b] hover:bg-violet-100"
         >
           <AddIcon />

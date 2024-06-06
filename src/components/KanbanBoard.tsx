@@ -2,7 +2,8 @@
 import { UseClientOnlyPortal } from "@/app/hooks/UseClientOnlyPortal";
 import AddIcon from "@/icons/AddIcon";
 import { generateId } from "@/lib/utils";
-import type { Column, Id, Task } from "@/types/kanbanBoard";
+import { IColumn } from "@/models/column.model";
+import type { Id, Task } from "@/types/kanbanBoard";
 import {
   DndContext,
   DragEndEvent,
@@ -15,18 +16,27 @@ import {
 } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ColumnContainer from "./ColumnsContainer";
 import TaskCard from "./TaskCard";
 import { Button } from "./ui/button";
 
 export default function KanbanBoard() {
-  const [columns, setColumns] = useState<Column[]>([]);
-  const columnsId = useMemo(() => columns.map((col) => col.id), [columns]);
-  const [activeColumn, setActiveColumn] = useState<Column | null>(null);
+  const [columns, setColumns] = useState<IColumn[]>([]);
+  const columnsId = useMemo(() => columns.map((col) => col._id), [columns]);
+  const [activeColumn, setActiveColumn] = useState<IColumn | null>(null);
   const [activeTask, setActiveTask] = useState<Task | null>(null);
-
   const [tasks, setTasks] = useState<Task[]>([]);
+  console.log(columns);
+
+  useEffect(() => {
+    const fetchColumns = async () => {
+      const columnsData = await getAllColumns();
+      setColumns(columnsData);
+    };
+
+    fetchColumns();
+  }, []);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 3 } }),
@@ -48,9 +58,9 @@ export default function KanbanBoard() {
             <SortableContext items={columnsId}>
               {columns.map((col) => (
                 <ColumnContainer
-                  key={col.id}
+                  key={col._id}
                   column={col}
-                  tasks={tasks.filter((task) => task.columnId === col.id)}
+                  tasks={tasks.filter((task) => task.columnId === col._id)}
                   deleteColumn={deleteColumn}
                   updateColumn={updateColumn}
                   createTask={createTask}
@@ -162,29 +172,98 @@ export default function KanbanBoard() {
     }
   }
 
-  function createNewColumn() {
-    const columnToAdd: Column = {
-      id: generateId(),
-      title: tColumn("colTitle"),
-    };
-    setColumns([...columns, columnToAdd]);
-    return;
+  async function getAllColumns() {
+    try {
+      const response = await fetch(`http://localhost:3000/api/board/columns`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch columns: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      if (Array.isArray(data)) {
+        return data as IColumn[];
+      } else {
+        throw new Error(`API response is not an array: ${data}`);
+      }
+    } catch (error) {
+      throw new Error(`Error fetching columns: ${error}`);
+    }
   }
 
-  function deleteColumn(id: Id) {
-    const filteredColumns = columns.filter((col) => col.id !== id);
-    setColumns(filteredColumns);
+  async function createNewColumn() {
+    try {
+      const response = await fetch(`http://localhost:3000/api/board/columns`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: tColumn("colTitle"),
+        }),
+      });
 
-    const newTasks = tasks.filter((task) => task.columnId !== id);
-    setTasks(newTasks);
+      if (!response.ok) {
+        throw new Error(`Failed to create column: ${response.statusText}`);
+      }
+
+      const columnToAdd = await response.json();
+      setColumns([...columns, columnToAdd]);
+      return;
+    } catch (error) {
+      throw new Error(`Failed to create column: ${error}`);
+    }
   }
 
-  function updateColumn(id: Id, title: Column["title"]) {
-    const columnsUpdated = columns.map((col) => {
-      if (col.id !== id) return col;
-      return { ...col, title };
-    });
-    setColumns(columnsUpdated);
+  async function deleteColumn(id: Id) {
+    try {
+      const response = await fetch(`http://localhost:3000/api/board/columns`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ _id: id }),
+      });
+
+      if (response.ok) {
+        const filteredColumns = columns.filter((col) => col._id !== id);
+        setColumns(filteredColumns);
+
+        const newTasks = tasks.filter((task) => task.columnId !== id);
+        setTasks(newTasks);
+      } else {
+        const errorData = await response.json();
+        throw new Error(`Error deleting column: ${errorData.msg}`);
+      }
+    } catch (error) {
+      throw new Error(`Error deleting column: ${error}`);
+    }
+  }
+
+  async function updateColumn(id: Id, title: IColumn["title"]) {
+    try {
+      const response = await fetch(`http://localhost:3000/api/board/columns`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ _id: id, title }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to update column: ${response.statusText}`);
+      }
+      const columnsData = await getAllColumns();
+      setColumns(columnsData);
+    } catch (error) {
+      throw new Error(`Error updating column: ${error}`);
+    }
   }
 
   function createTask(columnId: Id) {

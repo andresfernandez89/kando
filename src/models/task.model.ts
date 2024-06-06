@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 
 export interface Task extends mongoose.Document {
+  _id: string;
   content: string;
-  columnId: Number;
+  columnId: string;
 }
 
 const TaskSchema = new mongoose.Schema<Task>(
@@ -11,7 +12,7 @@ const TaskSchema = new mongoose.Schema<Task>(
       type: String,
     },
     columnId: {
-      type: Number,
+      type: String,
     },
   },
   {

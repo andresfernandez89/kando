@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 
-export interface Column extends mongoose.Document {
+export interface IColumn extends mongoose.Document {
+  _id: string;
   title: string;
 }
 
-const ColumnSchema = new mongoose.Schema<Column>(
+const ColumnSchema = new mongoose.Schema<IColumn>(
   {
     title: {
       type: String,
@@ -16,4 +17,4 @@ const ColumnSchema = new mongoose.Schema<Column>(
 );
 
 export default mongoose?.models?.Column ||
-  mongoose.model<Column>("Column", ColumnSchema);
+  mongoose.model<IColumn>("Column", ColumnSchema);

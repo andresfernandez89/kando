@@ -4,9 +4,7 @@ This application combines a Kanban board and a Todo list for seamless task manag
 
 ## Demo
 
-https://kando-nextjs.vercel.app/es/home/login
-
-![GIF demo]()
+![GIF demo](https://drive.google.com/uc?export=view&id=1jCANEGV-rlgDGLHNfX3BsG3s7Z2OXjza)
 
 ## Tech Stack
 
@@ -42,17 +40,17 @@ Start the server
 
 To run this project, you will need to add the following environment variables to your **`.env`** file:
 
-`API_URL='http://localhost:3000/api'`
+`API_URL=`
 
 `MONGO_URI=`
 
-`DB_NAME=kando_db`
+`DB_NAME=`
 
 `GOOGLE_CLIENT_ID=`
 
 `GOOGLE_CLIENT_SECRET=`
 
-`NEXTAUTH_URL=http://localhost:3000`
+`NEXTAUTH_URL=`
 
 `NEXTAUTH_SECRET=`
 

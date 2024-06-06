@@ -12,6 +12,7 @@ export const dbConnect = async () => {
   try {
     const { connection } = await mongoose.connect(MONGO_URI as string);
     if (connection.readyState === 1) {
+      console.log("DB connection successful!");
       return Promise.resolve(true);
     }
   } catch (error) {

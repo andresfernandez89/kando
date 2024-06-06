@@ -94,34 +94,3 @@ export async function PUT(req: Request) {
     );
   }
 }
-/*
-function updateColumn(id: Id, title: Column["title"]) {
-  const columnsUpdated = columns.map((col) => {
-    if (col.id !== id) return col;
-    return { ...col, title };
-  });
-  setColumns(columnsUpdated);
-}
-
-function createTask(columnId: Id) {
-  const newTask: Task = {
-    id: generateId(),
-    columnId,
-    content: "",
-  };
-
-  setTasks([...tasks, newTask]);
-}
-
-function deleteTask(id: Id) {
-  const newTasks = tasks.filter((task) => task.id !== id);
-  setTasks(newTasks);
-}
-
-function updateTask(id: Id, content: Task["content"]) {
-  const tasksUpdated = tasks.map((task) => {
-    if (task.id !== id) return task;
-    return { ...task, content };
-  });
-  setTasks(tasksUpdated);
-} */

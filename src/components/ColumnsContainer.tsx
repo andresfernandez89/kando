@@ -1,7 +1,8 @@
 import AddIcon from "@/icons/AddIcon";
 import DeleteIcon from "@/icons/deleteIcon";
 import { IColumn } from "@/models/column.model";
-import type { Column, Id, Task } from "@/types/kanbanBoard";
+import { ITask } from "@/models/task.model";
+import type { Column, Id } from "@/types/kanbanBoard";
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useTranslations } from "next-intl";
@@ -11,11 +12,11 @@ import { Button } from "./ui/button";
 
 interface Props {
   column: IColumn;
-  tasks: Task[];
+  tasks: ITask[];
   deleteColumn: (id: Id) => void;
   updateColumn: (id: Id, title: Column["title"]) => void;
   createTask: (columnId: Id) => void;
-  updateTask: (id: Id, content: Task["content"]) => void;
+  updateTask: (id: Id, content: ITask["content"]) => void;
   deleteTask: (id: Id) => void;
 }
 
@@ -35,7 +36,7 @@ export default function ColumnContainer(props: Props) {
   const [editMode, setEditMode] = useState<boolean>(false);
 
   const tasksId = useMemo(() => {
-    return tasks.map((task) => task.id);
+    return tasks.map((task) => task._id);
   }, [tasks]);
 
   const {
@@ -92,7 +93,6 @@ export default function ColumnContainer(props: Props) {
               <input
                 className="titleColumn-placeholder rounded border-2 py-1 pl-1 text-base font-medium outline-none focus:w-full focus:border-violet-600 focus:bg-violet-400 "
                 placeholder={t("colTitle")}
-                //value={column.title}
                 onChange={(e) => updateColumn(column._id, e.target.value)}
                 autoFocus
                 onBlur={() => setEditMode(false)}
@@ -115,7 +115,7 @@ export default function ColumnContainer(props: Props) {
         <SortableContext items={tasksId}>
           {tasks.map((task) => (
             <TaskCard
-              key={task.id}
+              key={task._id}
               task={task}
               deleteTask={deleteTask}
               updateTask={updateTask}

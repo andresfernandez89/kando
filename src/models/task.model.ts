@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
-export interface Task extends mongoose.Document {
+export interface ITask extends mongoose.Document {
   _id: string;
   content: string;
-  columnId: string;
+  columnId: string | number;
 }
 
-const TaskSchema = new mongoose.Schema<Task>(
+const TaskSchema = new mongoose.Schema<ITask>(
   {
     content: {
       type: String,
@@ -21,4 +21,4 @@ const TaskSchema = new mongoose.Schema<Task>(
 );
 
 export default mongoose?.models?.Task ||
-  mongoose.model<Task>("Task", TaskSchema);
+  mongoose.model<ITask>("Task", TaskSchema);

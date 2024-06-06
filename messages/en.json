@@ -71,5 +71,11 @@
     "registerBtn": "Register",
     "loginMsg": "Are you already registered?",
     "login": "Login"
+  },
+  "Todo": {
+    "inputTxt": "White here new task...",
+    "addBtn": "Add Task",
+    "saveBtn": "Update Task",
+    "loading": "Loading task..."
   }
 }

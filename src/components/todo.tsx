@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import DeleteIcon from "@/icons/deleteIcon";
 import EditIcon from "@/icons/editIcon";
+import { useTranslations } from "next-intl";
 
 type Todo = {
   _id: string;
@@ -126,6 +127,8 @@ export default function ToDo() {
     }
   };
 
+  const t = useTranslations("Todo");
+
   return (
     <div className="flex flex-col items-center justify-center gap-5">
       <div className="m-auto flex w-full flex-col items-center justify-center gap-3 overflow-x-auto overflow-y-hidden">
@@ -145,7 +148,7 @@ export default function ToDo() {
               className="flex h-[45px] w-[272px] min-w-[272px] cursor-pointer gap-2 rounded-lg border-none p-4"
               onClick={handleSave}
             >
-              Save
+              {t("saveBtn")}
             </Button>
           </>
         ) : (
@@ -153,7 +156,7 @@ export default function ToDo() {
           <>
             <input
               type="text"
-              placeholder="Write here new task..."
+              placeholder={t("inputTxt")}
               value={newTodo}
               className="log:w-8/12 h-[45px] w-[272px] rounded-lg p-3 outline-none"
               onChange={(e) => setNewTodo(e.target.value)}
@@ -163,14 +166,14 @@ export default function ToDo() {
               className="flex h-[45px] w-[272px] min-w-[272px] cursor-pointer gap-2 rounded-lg border-none p-4"
               onClick={addTodo}
             >
-              Add ToDo
+              {t("addBtn")}
             </Button>
           </>
         )}
       </div>
       <div className="mt-10 flex w-full flex-col items-center justify-center gap-1">
         {isLoading && (
-          <p className="my-10 text-xl italic text-pink-400">Loading Task...</p>
+          <p className="my-10 text-xl text-pink-400">{t("loading")}</p>
         )}
         {!isLoading && todo && todo.length === 0 ? (
           <div className="my-10 text-xl italic text-pink-400">No Task</div>

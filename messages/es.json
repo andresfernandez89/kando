@@ -69,5 +69,11 @@
     "registerBtn": "Registrar",
     "loginMsg": "Ya esta registrado?",
     "login": "Ingresa"
+  },
+  "Todo": {
+    "inputTxt": "Escribe tu tarea...",
+    "addBtn": "Agragar Tarea",
+    "saveBtn": "Actualizar Tarea",
+    "loading": "Abriendo tarea..."
   }
 }

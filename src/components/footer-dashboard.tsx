@@ -8,9 +8,9 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="mx-4 mt-6 rounded-lg bg-muted p-4 shadow md:flex md:items-center md:justify-between md:p-4 xl:p-6">
+      <footer className="mx-4 mt-6 flex flex-col items-center justify-center rounded-lg bg-muted p-4 shadow md:flex md:flex-row md:items-center md:justify-between md:p-4 xl:p-6">
         <ul className="mb-6 flex flex-wrap items-center md:mb-0">
-          <li>
+          {/* <li>
             <Link
               href="#"
               className="mr-4 text-sm font-normal text-gray-400 hover:underline md:mr-6"
@@ -25,7 +25,7 @@ export default function Footer() {
             >
               {t("privacy")}
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link
               href="#"

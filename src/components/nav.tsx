@@ -10,6 +10,17 @@ export function Navbar() {
   const t = useTranslations("Nav");
   const locale = useLocale();
 
+  const handleNav = () => {
+    const sidebar = document.getElementById("sidebar");
+    const sidebarBackdrop = document.getElementById("sidebarBackdrop");
+    if (sidebar) {
+      sidebar.classList.toggle("hidden");
+    }
+    if (sidebarBackdrop) {
+      sidebarBackdrop.classList.toggle("hidden");
+    }
+  };
+
   return (
     <nav className="fixed z-30 w-full border-b border-background bg-background">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -17,6 +28,7 @@ export function Navbar() {
           <div className="flex items-center justify-start">
             <button
               id="toggleSidebarMobile"
+              onClick={handleNav}
               aria-expanded="true"
               aria-controls="sidebar"
               className="mr-2 cursor-pointer rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 lg:hidden"
@@ -58,8 +70,8 @@ export function Navbar() {
             </a>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="mr-5 flex justify-end gap-5">
+          <div className="flex items-center gap-1 md:gap-4 ">
+            <div className="mr-1 flex justify-end gap-5 md:mr-5">
               <button
                 className="text-md relative m-1 flex px-2 py-1 align-middle font-bold text-violet-500 hover:text-violet-300 dark:text-violet-400 dark:hover:text-neutral-200"
                 onClick={async () => {

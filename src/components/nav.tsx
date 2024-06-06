@@ -70,8 +70,8 @@ export function Navbar() {
             </a>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="mr-5 flex justify-end gap-5">
+          <div className="flex items-center gap-1 md:gap-4 ">
+            <div className="mr-1 flex justify-end gap-5 md:mr-5">
               <button
                 className="text-md relative m-1 flex px-2 py-1 align-middle font-bold text-violet-500 hover:text-violet-300 dark:text-violet-400 dark:hover:text-neutral-200"
                 onClick={async () => {

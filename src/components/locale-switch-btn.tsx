@@ -28,7 +28,7 @@ export default function LocaleSwitchBtn() {
       className="flex w-full items-center justify-end gap-x-2 pr-2 pt-1"
     >
       <span className="text-lg">{getLocaleFlag(otherLocale)}</span>
-      <p className="text-sm">{t("switch")}</p>
+      <p className="hidden text-sm">{t("switch")}</p>
     </Link>
   );
 }

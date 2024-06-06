@@ -19,23 +19,22 @@ export default function ToDo() {
   const [editTodo, setEditTodo] = useState<Todo | null>(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/todo`)
+    fetch(`http://localhost:3000/api/todo`, { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data)) {
-          setTodo(data);
-        } else {
-          setTodo([]);
-          console.error("API response is not an array:", data);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch todos:", error);
-        setTodo([]);
+        setTodo(data);
         setIsLoading(false);
       });
   }, []);
+
+  const getData = () => {
+    fetch(`http://localhost:3000/api/todo`, { cache: "no-store" })
+      .then((res) => res.json())
+      .then((data) => {
+        setTodo(data);
+        setIsLoading(false);
+      });
+  };
 
   const addTodo = async () => {
     if (!newTodo) return;
@@ -50,9 +49,9 @@ export default function ToDo() {
       }),
     });
     const data = await response.json();
-    console.log(data);
     setTodo([...todo, data]);
     setNewTodo("");
+    getData();
   };
 
   const handleEdit = (todo: Todo) => {
@@ -96,21 +95,34 @@ export default function ToDo() {
   };
 
   const toggleTodo = async (id: string, completed: boolean) => {
+    // Encuentra el todo correspondiente por su id para obtener el texto actual
+    const currentTodo = todo.find((todo: Todo) => todo._id === id);
+
+    if (!currentTodo) {
+      console.error("Todo not found");
+      return;
+    }
+
     const response = await fetch(`http://localhost:3000/api/todo`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id, completed: !completed }),
+      body: JSON.stringify({
+        id,
+        text: currentTodo.text,
+        completed: !completed,
+      }),
     });
+
     if (response.status === 200) {
       setTodo(
         todo.map((todo: Todo) =>
-          todo._id === id
-            ? { ...todo, text: todo.text, completed: !completed }
-            : todo,
+          todo._id === id ? { ...todo, completed: !completed } : todo,
         ),
       );
+    } else {
+      console.error("Failed to update todo:", await response.text());
     }
   };
 
@@ -186,8 +198,7 @@ export default function ToDo() {
                   </div>
                   <div>
                     <button
-                      className=" stroke-gray-400 pl-2
-                                            hover:stroke-red-500"
+                      className=" stroke-gray-400 pl-2 hover:stroke-red-500"
                       onClick={() => handleEdit(todo)}
                     >
                       <EditIcon />

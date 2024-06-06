@@ -2,7 +2,7 @@
   "Aside": {
     "title": "The Nature Blog",
     "board": "Board",
-    "todo": "ToDo",
+    "todo": "ToDo List",
     "p2": "",
     "p3": ""
   },
@@ -71,5 +71,18 @@
     "registerBtn": "Register",
     "loginMsg": "Are you already registered?",
     "login": "Login"
+  },
+  "Todo": {
+    "inputTxt": "White here new task...",
+    "addBtn": "Add Task",
+    "saveBtn": "Update Task",
+    "loading": "Loading task..."
+  },
+  "Home": {
+    "description": "Your ideal companion for organizing your daily tasks, managing personal or professional projects, and keeping up with everything you need to do. With an intuitive interface and features designed to make your life easier, our app will help you stay focused and productive."
+  },
+  "ModeToggleTheme": {
+    "light": "Light",
+    "dark": "Dark"
   }
 }

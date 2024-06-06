@@ -69,5 +69,18 @@
     "registerBtn": "Registrar",
     "loginMsg": "Ya esta registrado?",
     "login": "Ingresa"
+  },
+  "Todo": {
+    "inputTxt": "Escribe tu tarea...",
+    "addBtn": "Agragar Tarea",
+    "saveBtn": "Actualizar Tarea",
+    "loading": "Abriendo tarea..."
+  },
+  "Home": {
+    "description": "Tu compañero ideal para organizar tus tareas diarias, gestionar proyectos personales o profesionales, y mantenerte al día con todo lo que necesitas hacer. Con una interfaz intuitiva y funcionalidades diseñadas para facilitar tu vida, nuestra aplicación te ayudará a mantenerte enfocado y productivo."
+  },
+  "ModeToggleTheme": {
+    "light": "Día",
+    "dark": "Noche"
   }
 }

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import DeleteIcon from "@/icons/deleteIcon";
 import EditIcon from "@/icons/editIcon";
+import { useTranslations } from "next-intl";
 
 type Todo = {
   _id: string;
@@ -19,23 +20,22 @@ export default function ToDo() {
   const [editTodo, setEditTodo] = useState<Todo | null>(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/todo`)
+    fetch(`http://localhost:3000/api/todo`, { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data)) {
-          setTodo(data);
-        } else {
-          setTodo([]);
-          console.error("API response is not an array:", data);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch todos:", error);
-        setTodo([]);
+        setTodo(data);
         setIsLoading(false);
       });
   }, []);
+
+  const getData = () => {
+    fetch(`http://localhost:3000/api/todo`, { cache: "no-store" })
+      .then((res) => res.json())
+      .then((data) => {
+        setTodo(data);
+        setIsLoading(false);
+      });
+  };
 
   const addTodo = async () => {
     if (!newTodo) return;
@@ -50,9 +50,9 @@ export default function ToDo() {
       }),
     });
     const data = await response.json();
-    console.log(data);
     setTodo([...todo, data]);
     setNewTodo("");
+    getData();
   };
 
   const handleEdit = (todo: Todo) => {
@@ -96,23 +96,38 @@ export default function ToDo() {
   };
 
   const toggleTodo = async (id: string, completed: boolean) => {
+    // Encuentra el todo correspondiente por su id para obtener el texto actual
+    const currentTodo = todo.find((todo: Todo) => todo._id === id);
+
+    if (!currentTodo) {
+      console.error("Todo not found");
+      return;
+    }
+
     const response = await fetch(`http://localhost:3000/api/todo`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id, completed: !completed }),
+      body: JSON.stringify({
+        id,
+        text: currentTodo.text,
+        completed: !completed,
+      }),
     });
+
     if (response.status === 200) {
       setTodo(
         todo.map((todo: Todo) =>
-          todo._id === id
-            ? { ...todo, text: todo.text, completed: !completed }
-            : todo,
+          todo._id === id ? { ...todo, completed: !completed } : todo,
         ),
       );
+    } else {
+      console.error("Failed to update todo:", await response.text());
     }
   };
+
+  const t = useTranslations("Todo");
 
   return (
     <div className="flex flex-col items-center justify-center gap-5">
@@ -133,7 +148,7 @@ export default function ToDo() {
               className="flex h-[45px] w-[272px] min-w-[272px] cursor-pointer gap-2 rounded-lg border-none p-4"
               onClick={handleSave}
             >
-              Save
+              {t("saveBtn")}
             </Button>
           </>
         ) : (
@@ -141,7 +156,7 @@ export default function ToDo() {
           <>
             <input
               type="text"
-              placeholder="Write here new task..."
+              placeholder={t("inputTxt")}
               value={newTodo}
               className="log:w-8/12 h-[45px] w-[272px] rounded-lg p-3 outline-none"
               onChange={(e) => setNewTodo(e.target.value)}
@@ -151,14 +166,14 @@ export default function ToDo() {
               className="flex h-[45px] w-[272px] min-w-[272px] cursor-pointer gap-2 rounded-lg border-none p-4"
               onClick={addTodo}
             >
-              Add ToDo
+              {t("addBtn")}
             </Button>
           </>
         )}
       </div>
       <div className="mt-10 flex w-full flex-col items-center justify-center gap-1">
         {isLoading && (
-          <p className="my-10 text-xl italic text-pink-400">Loading Task...</p>
+          <p className="my-10 text-xl text-pink-400">{t("loading")}</p>
         )}
         {!isLoading && todo && todo.length === 0 ? (
           <div className="my-10 text-xl italic text-pink-400">No Task</div>
@@ -186,8 +201,7 @@ export default function ToDo() {
                   </div>
                   <div>
                     <button
-                      className=" stroke-gray-400 pl-2
-                                            hover:stroke-red-500"
+                      className=" stroke-gray-400 pl-2 hover:stroke-red-500"
                       onClick={() => handleEdit(todo)}
                     >
                       <EditIcon />

@@ -1,11 +1,13 @@
 import LocaleSwitchBtn from "@/components/locale-switch-btn";
 import { ModeToggleTheme } from "@/components/modeToggleTheme";
+import { useTranslations } from "next-intl";
 
 export default function HomeLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const t = useTranslations("Home");
   return (
     <section>
       <div className="relative flex min-h-screen">
@@ -17,11 +19,7 @@ export default function HomeLayout({
                 Kando
               </div>
               <div className="xl:text-md font-normal text-gray-200 sm:text-sm">
-                What is Lorem Ipsum Lorem Ipsum is simply dummy text of the
-                printing and typesetting industry Lorem Ipsum has been the
-                industryindustry&apos;s standard dummy text ever since the 1500s
-                when an unknown printer took a galley of type and scrambled it
-                to make a type specimen book it has?
+                {t("description")}
               </div>
             </div>
             <ul className="circles">

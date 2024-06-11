@@ -27,27 +27,27 @@ export default function RootLayout({
   const messages = useMessages();
   if (process.env.NEXTAUTH_URL)
     return (
-      <html lang={locale}>
-        <body
-          className={cn(
-            "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable,
-          )}
-        >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
+      <Providers>
+        <html lang={locale}>
+          <body
+            className={cn(
+              "min-h-screen bg-background font-sans antialiased",
+              fontSans.variable,
+            )}
           >
-            <Providers>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
               <NextIntlClientProvider locale={locale} messages={messages}>
                 <main>{children}</main>
               </NextIntlClientProvider>
-            </Providers>
-          </ThemeProvider>
-        </body>
-      </html>
+            </ThemeProvider>
+          </body>
+        </html>
+      </Providers>
     );
   throw new Error("Some env variables not set");
 }

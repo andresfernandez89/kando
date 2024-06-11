@@ -4,22 +4,22 @@ import SpainFlagIcon from "@/icons/spainFlagIcon";
 import UsaFlagIcon from "@/icons/usaFlagIcon";
 import { Link, usePathname } from "@/navigation";
 import { useLocale, useTranslations } from "next-intl";
+
+function getLocaleFlag(locale: string) {
+  switch (locale) {
+    case "es":
+      return <SpainFlagIcon />;
+    case "en":
+      return <UsaFlagIcon />;
+    default:
+      return null;
+  }
+}
 export default function LocaleSwitchBtn() {
   const t = useTranslations("LocaleSwitcher");
   const locale = useLocale();
   const otherLocale = locale === "en" ? "es" : "en";
   const pathname = usePathname();
-
-  function getLocaleFlag(locale: string) {
-    switch (locale) {
-      case "es":
-        return <SpainFlagIcon />;
-      case "en":
-        return <UsaFlagIcon />;
-      default:
-        return null;
-    }
-  }
 
   return (
     <Link

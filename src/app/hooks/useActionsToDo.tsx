@@ -1,7 +1,8 @@
+"use client";
 import { Todo } from "@/types/todo";
 import { useEffect, useState } from "react";
 
-const { NEXT_PUBLIC_API_URL } = process.env;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export function UseActionsTodo() {
   const [todo, setTodo] = useState<Todo[]>([]);
@@ -14,10 +15,10 @@ export function UseActionsTodo() {
   }, []);
 
   const getTodos = () => {
-    if (!NEXT_PUBLIC_API_URL) {
+    if (!API_URL) {
       throw new Error("NEXT_PUBLIC_API_URL is not defined");
     }
-    fetch(NEXT_PUBLIC_API_URL, { cache: "no-store" })
+    fetch(API_URL, { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
         setTodo(data);
@@ -27,11 +28,11 @@ export function UseActionsTodo() {
 
   const addTodo = async () => {
     if (!newTodo) return;
-    if (!NEXT_PUBLIC_API_URL) {
+    if (!API_URL) {
       throw new Error("NEXT_PUBLIC_API_URL is not defined");
     }
 
-    const response = await fetch(NEXT_PUBLIC_API_URL, {
+    const response = await fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,10 +48,10 @@ export function UseActionsTodo() {
   };
   const handleSave = async () => {
     if (!editTodo) return;
-    if (!NEXT_PUBLIC_API_URL) {
+    if (!API_URL) {
       throw new Error("NEXT_PUBLIC_API_URL is not defined");
     }
-    const response = await fetch(NEXT_PUBLIC_API_URL, {
+    const response = await fetch(API_URL, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -76,10 +77,10 @@ export function UseActionsTodo() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!NEXT_PUBLIC_API_URL) {
+    if (!API_URL) {
       throw new Error("NEXT_PUBLIC_API_URL is not defined");
     }
-    const response = await fetch(NEXT_PUBLIC_API_URL, {
+    const response = await fetch(API_URL, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -97,11 +98,11 @@ export function UseActionsTodo() {
       console.error("Todo not found");
       return;
     }
-    if (!NEXT_PUBLIC_API_URL) {
+    if (!API_URL) {
       throw new Error("NEXT_PUBLIC_API_URL is not defined");
     }
 
-    const response = await fetch(NEXT_PUBLIC_API_URL, {
+    const response = await fetch(API_URL, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

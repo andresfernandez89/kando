@@ -1,13 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
-import { ObjectId } from "mongodb";
 import clientPromise from "@/lib/todoConnect";
+import { ObjectId } from "mongodb";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
   const client = await clientPromise;
   const collection = client.db().collection("todo");
   try {
     const todo = await collection.find({}).toArray();
-    const totalTask = todo.length;
     return NextResponse.json(todo, { status: 200 });
   } catch (error) {
     return NextResponse.json({ msg: "Error", error }, { status: 500 });

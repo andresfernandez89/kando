@@ -3,6 +3,7 @@ import GitHubIcon from "@/icons/gitHubIcon";
 import InstabramIcon from "@/icons/instagramIcon";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+
 export default function Footer() {
   const t = useTranslations("Footer");
 
@@ -10,22 +11,6 @@ export default function Footer() {
     <>
       <footer className="mx-4 mt-6 flex flex-col items-center justify-center rounded-lg bg-muted p-4 shadow md:flex md:flex-row md:items-center md:justify-between md:p-4 xl:p-6">
         <ul className="mb-6 flex flex-wrap items-center md:mb-0">
-          {/* <li>
-            <Link
-              href="#"
-              className="mr-4 text-sm font-normal text-gray-400 hover:underline md:mr-6"
-            >
-              {t("terms")}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="#"
-              className="mr-4 text-sm font-normal text-gray-400 hover:underline md:mr-6"
-            >
-              {t("privacy")}
-            </Link>
-          </li> */}
           <li>
             <Link
               href="#"
@@ -64,9 +49,9 @@ export default function Footer() {
         </div>
       </footer>
       <p className="my-6 text-center text-sm text-violet-400">
-        &copy; 2024 -{" "}
+        {`© ${new Date().getFullYear()} `}
         <Link href="#" className="hover:underline" target="_blank">
-          Andres Fernandez - Sebastián Illa
+          Andres Fernandez - Sebastián Illa{" "}
         </Link>
         - {t("reserved")}.
       </p>

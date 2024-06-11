@@ -1,18 +1,16 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { GoogleSignBTN } from "./google-sign-btn";
-import GoogleIcon from "@/icons/goggleIcon";
 
 export default function Login() {
   const [error, setError] = useState("");
   const router = useRouter();
   const t = useTranslations("Login");
-  const locale = useLocale();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,7 +53,7 @@ export default function Login() {
         >
           {t("loginBtn")}
         </button>
-        <p className="font-bold"> O </p>
+        <p className="font-bold"> Ó </p>
 
         <GoogleSignBTN>{t("googleBtn")}</GoogleSignBTN>
 

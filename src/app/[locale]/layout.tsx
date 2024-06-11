@@ -25,7 +25,7 @@ export default function RootLayout({
   params: { locale: string };
 }>) {
   const messages = useMessages();
-  if (process.env.NEXTAUTH_URL)
+  if (process.env.NEXTAUTH_URL && process.env.NEXT_PUBLIC_API_URL)
     return (
       <Providers>
         <html lang={locale}>

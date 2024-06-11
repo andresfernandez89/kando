@@ -1,12 +1,11 @@
 "use client";
 import LocaleSwitchBtn from "@/components/locale-switch-btn";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useLocale, useTranslations } from "next-intl";
 import { ModeToggleTheme } from "./modeToggleTheme";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { UserAvatar } from "./userAvatar";
 
 export function Navbar() {
-  const { data: session } = useSession();
   const t = useTranslations("Nav");
   const locale = useLocale();
 
@@ -64,8 +63,6 @@ export function Navbar() {
               href="#"
               className="flex items-center text-xl font-bold lg:ml-2.5"
             >
-              {/* Logo */}
-
               <span className="ml-2 self-center whitespace-nowrap">Kando</span>
             </a>
           </div>
@@ -84,15 +81,7 @@ export function Navbar() {
                 {t("logout")}
               </button>
             </div>
-            {/* User Avatar */}
-            <Avatar>
-              <AvatarImage src={session?.user?.image ?? ""} alt="@shadcn" />
-              <AvatarFallback>
-                {session?.user?.email
-                  ? `${session.user.email[0].toLocaleUpperCase()}`
-                  : ""}
-              </AvatarFallback>
-            </Avatar>
+            <UserAvatar />
             <div className="flex items-center gap-4">
               <LocaleSwitchBtn />
               <ModeToggleTheme />

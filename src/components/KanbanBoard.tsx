@@ -1,6 +1,6 @@
 "use client";
-import { UseClientOnlyPortal } from "@/app/hooks/UseClientOnlyPortal";
-import AddIcon from "@/icons/AddIcon";
+import { UseClientOnlyPortal } from "@/app/hooks/useClientOnlyPortal";
+import AddIcon from "@/icons/addIcon";
 import { generateId } from "@/lib/utils";
 import type { Column, Id, Task } from "@/types/kanbanBoard";
 import {
@@ -16,8 +16,8 @@ import {
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
-import ColumnContainer from "./ColumnsContainer";
-import TaskCard from "./TaskCard";
+import ColumnContainer from "./columnsContainer";
+import TaskCard from "./taskCard";
 import { Button } from "./ui/button";
 
 export default function KanbanBoard() {

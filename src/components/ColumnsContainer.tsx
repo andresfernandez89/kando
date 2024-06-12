@@ -1,11 +1,11 @@
-import AddIcon from "@/icons/AddIcon";
+import AddIcon from "@/icons/addIcon";
 import DeleteIcon from "@/icons/deleteIcon";
 import type { Column, Id, Task } from "@/types/kanbanBoard";
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
-import TaskCard from "./TaskCard";
+import TaskCard from "./taskCard";
 import { Button } from "./ui/button";
 
 interface Props {

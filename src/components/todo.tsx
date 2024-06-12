@@ -1,131 +1,25 @@
 "use client";
-import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
+import { UseActionsTodo } from "@/app/hooks/useActionsToDo";
 import DeleteIcon from "@/icons/deleteIcon";
 import EditIcon from "@/icons/editIcon";
+import { Todo } from "@/types/todo";
 import { useTranslations } from "next-intl";
-
-type Todo = {
-  _id: string;
-  text: string | null;
-  completed: boolean;
-};
-
-const { API_URL } = process.env;
+import { Button } from "./ui/button";
 
 export default function ToDo() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [todo, setTodo] = useState<Todo[]>([]);
-  const [newTodo, setNewTodo] = useState<string>("");
-  const [editTodo, setEditTodo] = useState<Todo | null>(null);
-
-  useEffect(() => {
-    fetch(`http://localhost:3000/api/todo`, { cache: "no-store" })
-      .then((res) => res.json())
-      .then((data) => {
-        setTodo(data);
-        setIsLoading(false);
-      });
-  }, []);
-
-  const getData = () => {
-    fetch(`http://localhost:3000/api/todo`, { cache: "no-store" })
-      .then((res) => res.json())
-      .then((data) => {
-        setTodo(data);
-        setIsLoading(false);
-      });
-  };
-
-  const addTodo = async () => {
-    if (!newTodo) return;
-
-    const response = await fetch(`http://localhost:3000/api/todo`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        text: newTodo,
-      }),
-    });
-    const data = await response.json();
-    setTodo([...todo, data]);
-    setNewTodo("");
-    getData();
-  };
-
-  const handleEdit = (todo: Todo) => {
-    setEditTodo(todo);
-  };
-
-  const handleSave = async () => {
-    if (!editTodo) return;
-    const response = await fetch(`http://localhost:3000/api/todo`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: editTodo._id,
-        text: editTodo.text,
-        completed: editTodo.completed,
-      }),
-    });
-    if (response.status === 200) {
-      setTodo(
-        todo.map((todo: Todo) =>
-          todo._id === editTodo._id ? { ...todo, text: editTodo.text } : todo,
-        ),
-      );
-      setEditTodo(null);
-    }
-  };
-
-  const handleDelete = async (id: string) => {
-    const response = await fetch(`http://localhost:3000/api/todo`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id }),
-    });
-    if (response.status === 200) {
-      setTodo(todo.filter((todo: Todo) => todo._id !== id));
-    }
-  };
-
-  const toggleTodo = async (id: string, completed: boolean) => {
-    // Encuentra el todo correspondiente por su id para obtener el texto actual
-    const currentTodo = todo.find((todo: Todo) => todo._id === id);
-
-    if (!currentTodo) {
-      console.error("Todo not found");
-      return;
-    }
-
-    const response = await fetch(`http://localhost:3000/api/todo`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id,
-        text: currentTodo.text,
-        completed: !completed,
-      }),
-    });
-
-    if (response.status === 200) {
-      setTodo(
-        todo.map((todo: Todo) =>
-          todo._id === id ? { ...todo, completed: !completed } : todo,
-        ),
-      );
-    } else {
-      console.error("Failed to update todo:", await response.text());
-    }
-  };
+  const {
+    todo,
+    addTodo,
+    handleSave,
+    handleEdit,
+    handleDelete,
+    toggleTodo,
+    newTodo,
+    setNewTodo,
+    editTodo,
+    setEditTodo,
+    isLoading,
+  } = UseActionsTodo();
 
   const t = useTranslations("Todo");
 
@@ -133,7 +27,6 @@ export default function ToDo() {
     <div className="flex flex-col items-center justify-center gap-5">
       <div className="m-auto flex w-full flex-col items-center justify-center gap-3 overflow-x-auto overflow-y-hidden">
         {editTodo ? (
-          /* Edit ToDo */
           <>
             <input
               type="text"
@@ -152,7 +45,6 @@ export default function ToDo() {
             </Button>
           </>
         ) : (
-          /* Add ToDo */
           <>
             <input
               type="text"

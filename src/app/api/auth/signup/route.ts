@@ -4,12 +4,21 @@ import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const { firstName, lastName, email, password, image } = await req.json();
+  const { firstName, lastName, email, password, rePassword, image } =
+    await req.json();
 
   if (!password || password.length < 8)
     return NextResponse.json(
       {
         msg: "Password must be at least 8 characters",
+      },
+      { status: 400 },
+    );
+
+  if (password !== rePassword)
+    return NextResponse.json(
+      {
+        msg: "Passwords are not same",
       },
       { status: 400 },
     );

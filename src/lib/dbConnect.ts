@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-const { MONGO_URI } = process.env;
+const { MONGODB_URL } = process.env;
 
-if (!MONGO_URI) {
+if (!MONGODB_URL) {
   throw new Error(
     "Please define the MONGODB_URI environment variable inside .env",
   );
@@ -10,7 +10,7 @@ if (!MONGO_URI) {
 
 export const dbConnect = async () => {
   try {
-    const { connection } = await mongoose.connect(MONGO_URI as string);
+    const { connection } = await mongoose.connect(MONGODB_URL as string);
     if (connection.readyState === 1) {
       console.log("DB connection successful!");
       return Promise.resolve(true);

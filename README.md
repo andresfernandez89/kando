@@ -4,6 +4,8 @@ This application combines a Kanban board and a Todo list for seamless task manag
 
 ## Demo
 
+https://kando-nextjs.vercel.app/es/home/login
+
 ![GIF demo](https://drive.google.com/uc?export=view&id=1jCANEGV-rlgDGLHNfX3BsG3s7Z2OXjza)
 
 ## Tech Stack
@@ -40,19 +42,17 @@ Start the server
 
 To run this project, you will need to add the following environment variables to your **`.env`** file:
 
-`API_URL=`
+`API_URL= The base URL for your API requests.`
 
-`MONGO_URI=`
+`MONGODB_URL= The connection string for your MongoDB database.`
 
-`DB_NAME=`
+`GOOGLE_CLIENT_ID= The client ID for Google OAuth authentication.`
 
-`GOOGLE_CLIENT_ID=`
+`GOOGLE_CLIENT_SECRET= The client secret for Google OAuth authentication.`
 
-`GOOGLE_CLIENT_SECRET=`
+`NEXTAUTH_URL= The base URL of your Next.js application for NextAuth.`
 
-`NEXTAUTH_URL=`
-
-`NEXTAUTH_SECRET=`
+`NEXTAUTH_SECRET= A secret key for signing and encrypting NextAuth tokens.`
 
 ## Authors
 

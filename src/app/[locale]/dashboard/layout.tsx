@@ -1,4 +1,4 @@
-import Aside from "@/components/aside-dashboar";
+import Aside from "@/components/aside-dashboard";
 import Footer from "@/components/footer-dashboard";
 import { Navbar } from "@/components/nav";
 

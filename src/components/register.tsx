@@ -1,5 +1,4 @@
 "use client";
-import axios, { AxiosError } from "axios";
 import { signIn } from "next-auth/react";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
@@ -7,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export function Register() {
-  const [error, setError] = useState();
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const t = useTranslations("Register");
   const locale = useLocale();
@@ -17,22 +16,45 @@ export function Register() {
     const formData = new FormData(e.currentTarget);
 
     try {
-      const signupResponse = await axios.post("/api/auth/signup", {
-        firstName: formData.get("firstName"),
-        lastName: formData.get("lastName"),
-        email: formData.get("email"),
-        password: formData.get("password"),
-        rePassword: formData.get("rePassword"),
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: formData.get("firstName"),
+          lastName: formData.get("lastName"),
+          email: formData.get("email"),
+          password: formData.get("password"),
+          rePassword: formData.get("rePassword"),
+        }),
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.msg);
+      }
+
+      const signupResponse = await response.json();
+
       const res = await signIn("credentials", {
-        email: signupResponse.data.email,
+        email: signupResponse.email,
         password: formData.get("password"),
         redirect: false,
       });
-      if (res?.ok) return router.push("/");
+
+      if (res?.ok) {
+        return router.push("/");
+      }
+
+      if (res?.error) {
+        throw new Error(res.error);
+      }
     } catch (error) {
-      if (error instanceof AxiosError) {
-        setError(error.response?.data.msg);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred");
       }
     }
   };

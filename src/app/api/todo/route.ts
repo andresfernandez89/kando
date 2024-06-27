@@ -1,42 +1,70 @@
-import clientPromise from "@/lib/todoConnect";
-import { ObjectId } from "mongodb";
+import { dbConnect } from "@/lib/dbConnect";
+import Todo from "@/models/todo.model";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
-  const client = await clientPromise;
-  const collection = client.db().collection("todo");
+export async function GET(req: NextRequest) {
+  const userEmail = req.nextUrl.searchParams.get("userEmail");
   try {
-    const todo = await collection.find({}).toArray();
+    await dbConnect();
+    const todo = await Todo.find({ userEmail });
     return NextResponse.json(todo, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ msg: "Error", error }, { status: 500 });
+    return NextResponse.json(
+      { msg: "Error fetching todos", error },
+      { status: 500 },
+    );
   }
 }
 
 export async function POST(req: NextRequest) {
-  const client = await clientPromise;
-  const collection = client.db().collection("todo");
-  const { text } = await req.json();
   try {
-    const newTask = { text: text, completed: false };
-    await collection.insertOne(newTask);
-
+    const { text, sessionUser } = await req.json();
+    if (!text) {
+      return NextResponse.json(
+        { msg: "Missing text in request body" },
+        { status: 400 },
+      );
+    }
+    await dbConnect();
+    const newTask = await Todo.create({
+      text: text,
+      completed: false,
+      userEmail: sessionUser,
+    });
     return NextResponse.json(
-      { msg: "OK", POST: "Successful Task", newTask },
+      { msg: "OK", POST: "Task created successfully", newTask },
       { status: 201 },
     );
   } catch (error) {
-    return NextResponse.json({ msg: "Error", error }, { status: 500 });
+    return NextResponse.json(
+      { msg: "Error creating new task", error },
+      { status: 500 },
+    );
   }
 }
 
 export async function PUT(req: NextRequest) {
-  const client = await clientPromise;
-  const collection = client.db().collection("todo");
-  const { id, text, completed } = await req.json();
   try {
-    await collection.updateOne(
-      { _id: new ObjectId(id) },
+    const { id, text, completed } = await req.json();
+    if (!id) {
+      return NextResponse.json(
+        { msg: "Missing id in request body" },
+        { status: 400 },
+      );
+    } else if (!text) {
+      return NextResponse.json(
+        { msg: "Missing text in request body" },
+        { status: 400 },
+      );
+    } else if (completed === undefined) {
+      return NextResponse.json(
+        { msg: "Missing completed in request body" },
+        { status: 400 },
+      );
+    }
+    await dbConnect();
+    await Todo.updateOne(
+      { _id: id },
       { $set: { text: text, completed: completed } },
     );
 
@@ -45,22 +73,39 @@ export async function PUT(req: NextRequest) {
       { status: 200 },
     );
   } catch (error) {
-    return NextResponse.json({ msg: "Error", error }, { status: 500 });
+    return NextResponse.json(
+      { msg: "Error updating a task", error },
+      { status: 500 },
+    );
   }
 }
 
 export async function DELETE(req: NextRequest) {
-  const client = await clientPromise;
-  const collection = client.db().collection("todo");
-  const { id } = await req.json();
   try {
-    await collection.deleteOne({ _id: new ObjectId(id) });
+    const { id } = await req.json();
+    if (!id) {
+      return NextResponse.json(
+        { msg: "Missing id in request body" },
+        { status: 400 },
+      );
+    }
+    await dbConnect();
+    const result = await Todo.deleteOne({ _id: id });
+    if (result.deletedCount === 0) {
+      return NextResponse.json(
+        { success: false, message: "Task not found" },
+        { status: 404 },
+      );
+    }
 
     return NextResponse.json(
-      { message: "Task Successful delete" },
+      { message: "Task successful delete" },
       { status: 200 },
     );
   } catch (error) {
-    return NextResponse.json({ msg: "Error", error }, { status: 500 });
+    return NextResponse.json(
+      { msg: "Error deleting task", error },
+      { status: 500 },
+    );
   }
 }

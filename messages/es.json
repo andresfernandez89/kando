@@ -72,7 +72,7 @@
   },
   "Todo": {
     "inputTxt": "Escribe tu tarea...",
-    "addBtn": "Agragar Tarea",
+    "addBtn": "Agregar Tarea",
     "saveBtn": "Actualizar Tarea",
     "loading": "Abriendo tarea..."
   },

@@ -51,9 +51,8 @@ export default function Footer() {
       <p className="my-6 text-center text-sm text-violet-400">
         {`© ${new Date().getFullYear()} `}
         <Link href="#" className="hover:underline" target="_blank">
-          Andres Fernandez - Sebastián Illa{" "}
+          Andres Fernandez - Sebastián Illa
         </Link>
-        - {t("reserved")}.
       </p>
     </>
   );

@@ -1,5 +1,6 @@
 "use client";
 import { Todo } from "@/types/todo";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -9,16 +10,19 @@ export function UseActionsTodo() {
   const [editTodo, setEditTodo] = useState<Todo | null>(null);
   const [newTodo, setNewTodo] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
-    getTodos();
-  }, []);
+    if (status === "authenticated") {
+      getTodos();
+    }
+  }, [status]);
 
   const getTodos = () => {
     if (!API_URL) {
       throw new Error("NEXT_PUBLIC_API_URL is not defined");
     }
-    fetch(API_URL, { cache: "no-store" })
+    fetch(`${API_URL}?userEmail=${session?.user?.email}`, { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
         setTodo(data);
@@ -39,6 +43,7 @@ export function UseActionsTodo() {
       },
       body: JSON.stringify({
         text: newTodo,
+        sessionUser: session?.user?.email,
       }),
     });
     const data = await response.json();

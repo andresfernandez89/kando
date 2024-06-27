@@ -2,10 +2,11 @@ import { dbConnect } from "@/lib/dbConnect";
 import Todo from "@/models/todo.model";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const userEmail = req.nextUrl.searchParams.get("userEmail");
   try {
     await dbConnect();
-    const todo = await Todo.find({});
+    const todo = await Todo.find({ userEmail });
     return NextResponse.json(todo, { status: 200 });
   } catch (error) {
     return NextResponse.json(
@@ -17,7 +18,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { text } = await req.json();
+    const { text, sessionUser } = await req.json();
     if (!text) {
       return NextResponse.json(
         { msg: "Missing text in request body" },
@@ -25,8 +26,11 @@ export async function POST(req: NextRequest) {
       );
     }
     await dbConnect();
-    const newTask = await Todo.create({ text: text, completed: false });
-
+    const newTask = await Todo.create({
+      text: text,
+      completed: false,
+      userEmail: sessionUser,
+    });
     return NextResponse.json(
       { msg: "OK", POST: "Task created successfully", newTask },
       { status: 201 },
@@ -52,7 +56,7 @@ export async function PUT(req: NextRequest) {
         { msg: "Missing text in request body" },
         { status: 400 },
       );
-    } else if (completed) {
+    } else if (completed === undefined) {
       return NextResponse.json(
         { msg: "Missing completed in request body" },
         { status: 400 },
